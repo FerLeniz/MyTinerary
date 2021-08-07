@@ -1,38 +1,67 @@
-.App {
-  text-align: center;
+* {
+    font-family: 'Lobster', cursive;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.imgNav {
+    width: 4rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.textLogo {
+    color: rgb(58, 58, 185) !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#video {
+    position: absolute;
+    z-index: -1000;
+    right: 0;
+    min-width: 100%;
+    width: auto;
+    height: 43rem;
+    object-fit: cover;
+    overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+.contentVideo {
+    margin: 14vw 40vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.contentVideo h1 {
+    /* margin-bottom: 2rem; */
+    color: rgb(47, 47, 107);
+    text-shadow: 0.2rem 0.2rem #f9fbfd;
+    font-size: 9vw;
+}
+
+.spanTextVideo {
+    text-shadow: 0.2rem 0.2rem #f9fbfd;
+    background-color: crimson;
+}
+
+h2 span, .imgHero p {
+    text-shadow: 0.2rem 0.2rem #f9fbfd;
+}
+
+.popularText {
+    position: relative;
+    text-align: center;
+    text-shadow: 0.2rem 0.2rem rgb(47, 47, 107);
+}
+
+.imgHero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url("https://th.bing.com/th/id/R.ace86fa554e156be221f73ea3c5795f5?rik=Nxedd3WeNm0n2w&riu=http%3a%2f%2fwww.codigosanluis.com%2fwp-content%2fuploads%2f2017%2f01%2fimage56d8aeeac76684.06636628.jpg&ehk=H5b1%2b5t4OYTX4ARjerPt8qvAtkRVsrn5WDCaZbVffvk%3d&risl=&pid=ImgRaw&r=0");
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 25rem;
+
+}
+
+.imgCarousel{
+    width: 50%;
+    height: 50%;
 }
