@@ -6,8 +6,9 @@
     width: 4rem;
 }
 
-.textLogo {
+.textLogo,.carouselTitle {
     color: rgb(58, 58, 185) !important;
+    text-shadow: 0.05em 0.02em rgba(0, 0, 0, 0.781);
 }
 
 #video {
@@ -15,7 +16,7 @@
     z-index: -1000;
     right: 0;
     min-width: 100%;
-    width: auto;
+    
     height: 43rem;
     object-fit: cover;
     overflow: hidden;
@@ -37,7 +38,8 @@
     background-color: crimson;
 }
 
-h2 span, .imgHero p {
+h2 span,
+.imgHero p {
     text-shadow: 0.2rem 0.2rem #f9fbfd;
 }
 
@@ -61,7 +63,56 @@ h2 span, .imgHero p {
 
 }
 
-.imgCarousel{
-    width: 50%;
-    height: 50%;
+.containerCarousel {
+    background: linear-gradient(189deg, rgba(255,255,255,1) 22%, rgba(35,86,255,1) 67%);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    z-index: index -1;
 }
+
+
+.photo {
+    width: 30vw;
+    height: 20vw;
+    margin: 2vw;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 3;
+}
+
+.photoTitle{
+    background-color: rgba(6, 6, 153,0.8);
+    color: rgb(224, 220, 220);
+    text-align: center;
+    text-shadow: 0.08rem 0.08rem #f68b10;
+    padding: 0.1rem;
+}
+
+.carousel-indicators{
+    margin-bottom: 0rem!important;
+}
+
+footer{
+    background-color:  rgba(35,86,255,1);
+    text-align: center;
+    
+}
+
+.footerIcon{
+    width: 3em;
+    padding: 0.5em;
+    color: white;
+  }
+
+@media only screen and (max-width: 601px) {
+    .photo {
+     width: 50vw;
+     height: 50vw;
+     margin: 1em;
+    }
+  }
+

@@ -1,4 +1,4 @@
-import video from '../assets/videoFondo.mp4'
+import video from '../assets/video.mp4'
 
 const TextAndVideo=() => {
     return(
