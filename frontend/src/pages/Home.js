@@ -18,7 +18,7 @@ export default class Home extends React.Component{
         ,
         [
           { id: 5, name: " Dordogne", url: 'https://th.bing.com/th/id/OIP.v7tlUBpGZgvwgflPoWb3dQHaFR?pid=ImgDet&rs=1', slide: "B" },
-          { id: 6, name: "Groenlandia", url: 'https://th.bing.com/th/id/OIP.9WilmeY7H723cjs4V-GV3wHaE8?pid=ImgDet&rs=1' },
+          { id: 6, name: "Greenland", url: 'https://th.bing.com/th/id/OIP.9WilmeY7H723cjs4V-GV3wHaE8?pid=ImgDet&rs=1' },
           { id: 7, name: "Papeete", url: 'https://th.bing.com/th/id/OIP.uAte1uOToJFkVfMOWFiSiAHaE8?pid=ImgDet&rs=1' },
           { id: 8, name: "Vevey", url: 'https://viajes.nationalgeographic.com.es/medio/2018/12/28/vevey-suiza_27e0b3f4_1500x1124.jpg' },
         ]
