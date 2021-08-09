@@ -1,18 +1,21 @@
+import {Link} from 'react-router-dom'
+
 const Footer=()=>{
     return(
         <footer className="row text-center">
             <div className="col-sm-12 col-lg-6">
                 <ul >
-                    <li className="list-unstyled"><h3>Home</h3></li>
-                    <li className="list-unstyled text-white fs-5">Home</li>
-                    <li className="list-unstyled text-white fs-5">Cities</li>
-                    <li className="list-unstyled text-white fs-5">Sign in</li>
-                    <li className="list-unstyled text-white fs-5">Sign up</li>
+                     <li className="list-unstyled mt-3"><h3>Menu</h3></li>
+                    <Link  to="/"><li className="list-unstyled text-white fs-5">Home</li></Link> 
+                    <Link to="/Cities"><li className="list-unstyled text-white fs-5">Cities</li></Link> 
+                    <Link to="/notFound"><li className="list-unstyled text-white fs-5">Sign in</li></Link> 
+                    <Link to="/notFound"><li className="list-unstyled text-white fs-5">Sign up</li></Link> 
                 </ul>
             </div>
             <div className="col-sm-12 col-lg-6">
-            <h3>Contact</h3>
+            
             <ul className="list-unstyled">
+                <li className="list-unstyled fs-5"><h3 className="mt-3">Contact</h3></li>
                 <li>
                     <a href="https://www.instagram.com/my.itinerary/" target='_blank' rel="noreferrer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-instagram footerIcon"

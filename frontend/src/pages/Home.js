@@ -6,11 +6,12 @@ import Hero from '../components/Hero'
 import Carusel from '../components/Carousel'
 import Footer from '../components/Footer'
 
+
 export default class Home extends React.Component{
      arrayCities = [
         [
           { id: 1, name: "Mexico City", url: 'https://th.bing.com/th/id/R.f124a63611bfdcec864d7a22cfe0d2b7?rik=3EK6hlHoJWa%2baQ&riu=http%3a%2f%2f1.bp.blogspot.com%2f-0q9rkfRVfPU%2fUxW9bpbouJI%2fAAAAAAAAd3Y%2ffh5Eb9jsn9w%2fs1600%2fMexico-City-Mexico.jpg&ehk=8hLyAwb74rVYzHHpsJpdPGMRXSdBg5x472ixn%2bo9DHc%3d&risl=&pid=ImgRaw&r=0', slide: "A" },
-          { id: 2, name: "Amazonas", url: 'https://www.miviaje.info/wp-content/uploads/2019/03/amazonas-peruano-belleza-sin-fin.jpg' },
+          { id: 2, name: "Iquitos", url: 'https://www.miviaje.info/wp-content/uploads/2019/03/amazonas-peruano-belleza-sin-fin.jpg' },
           { id: 3, name: "Fanjingshan", url: 'https://s.yimg.com/uu/api/res/1.2/VST036KhGikkkHkqSOcrDw--~B/aD0xOTI0O3c9Mjg4NztzbT0xO2FwcGlkPXl0YWNoeW9u/http://media.zenfs.com/en_US/News/US-AFPRelax/04_fanjingshan_.93ef7155937.original.jpg' },
           { id: 4, name: "Dakar", url: 'https://images.lonelyplanetitalia.it/static/places/dakar-4469.jpg?q=80&p=slider&s=b8c2fcfabffe1f1fdf2bb826714a2996' },
         ]
@@ -18,7 +19,7 @@ export default class Home extends React.Component{
         [
           { id: 5, name: " Dordogne", url: 'https://th.bing.com/th/id/OIP.v7tlUBpGZgvwgflPoWb3dQHaFR?pid=ImgDet&rs=1', slide: "B" },
           { id: 6, name: "Groenlandia", url: 'https://th.bing.com/th/id/OIP.9WilmeY7H723cjs4V-GV3wHaE8?pid=ImgDet&rs=1' },
-          { id: 7, name: "French Polynesia", url: 'https://th.bing.com/th/id/OIP.uAte1uOToJFkVfMOWFiSiAHaE8?pid=ImgDet&rs=1' },
+          { id: 7, name: "Papeete", url: 'https://th.bing.com/th/id/OIP.uAte1uOToJFkVfMOWFiSiAHaE8?pid=ImgDet&rs=1' },
           { id: 8, name: "Vevey", url: 'https://viajes.nationalgeographic.com.es/medio/2018/12/28/vevey-suiza_27e0b3f4_1500x1124.jpg' },
         ]
         ,
@@ -38,7 +39,7 @@ export default class Home extends React.Component{
                 <TextAndVideo/>
                 <Hero/>
                 <Carusel cities = {this.arrayCities} />
-                <Footer className="shadow"/>
+                <Footer />
             </>
         )
     }

@@ -13,7 +13,6 @@ function App() {
     <Route path="/Cities" component={Cities}/>
     <Route path="/notFound" component={notFound404}/>
     <Redirect to="/notFound"/>
-    {/* <Home/> */}
     </Switch>
     </BrowserRouter>
     

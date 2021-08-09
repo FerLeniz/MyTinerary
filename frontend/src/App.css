@@ -6,6 +6,12 @@
     width: 4rem;
 }
 
+.navbar-nav>a:hover{
+    background-color: rgba(0, 0, 0, 0.287);
+    padding: 0.3em;
+    border-radius: 10px 100px / 120px;
+}
+
 .textLogo,.carouselTitle {
     color: rgb(58, 58, 185) !important;
     text-shadow: 0.05em 0.02em rgba(0, 0, 0, 0.781);
@@ -39,8 +45,8 @@
 }
 
 h2 span,
-.imgHero p {
-    text-shadow: 0.2rem 0.2rem #f9fbfd;
+.imgHero p,li>h3 {
+    text-shadow: 0.1rem 0.1rem #f9fbfd;
 }
 
 .popularText {
@@ -63,8 +69,23 @@ h2 span,
 
 }
 
+button{
+    border-radius: 45% 10%!important;
+}
+button:hover{
+    border-radius: 15px 50px 30px!important;
+}
+
+a span{
+    color: rgb(0, 0, 0);
+    background-color: rgb(0, 38, 255);
+    border-radius: 25% 10%;
+    
+}
+
 .containerCarousel {
-    background: linear-gradient(189deg, rgba(255,255,255,1) 22%, rgba(35,86,255,1) 67%);
+    /* background: linear-gradient(189deg, rgba(255,255,255,1) 22%, rgba(35,86,255,1) 67%); */
+    background: linear-gradient(189deg, rgba(255,255,255,1) 14%, rgb(14, 74, 151) 67%);
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -97,15 +118,26 @@ h2 span,
 }
 
 footer{
-    background-color:  rgba(35,86,255,1);
+    /* background-color:  rgba(35,86,255,1); */
     text-align: center;
-    
+    background-image: url('../src/assets/cieloFooter.jfif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .footerIcon{
     width: 3em;
     padding: 0.5em;
     color: white;
+  }
+
+  .otherPage{
+      min-height: 10em;
+      margin: 0em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }
 
 @media only screen and (max-width: 601px) {

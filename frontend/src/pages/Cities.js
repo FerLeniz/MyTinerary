@@ -5,7 +5,7 @@ const CitiesPage=()=>{
     return(
         <>
         <Header/>
-        <h1>Welcome to the cities</h1>
+        <h1 className="bg-warning text-center otherPage">Welcome to the cities</h1>
         <Footer/>
         </>
         
