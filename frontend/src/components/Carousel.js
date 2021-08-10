@@ -10,7 +10,7 @@ const Carusel = ({cities}) => {
 
   return (
     <>
-      <h2 className="text-center carouselTitle fs-1 my-3 animate__animated animate__rubberBand animate__delay-5s">Popular MYtineraries</h2>
+      <h2 className="text-center carouselTitle fs-1 animate__animated animate__rubberBand animate__delay-5s">Popular MYtineraries</h2>
       <Carousel fade activeIndex={index} onSelect={handleSelect}>
         {cities.map((cityGroup, index) => {
           return (

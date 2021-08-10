@@ -8,7 +8,12 @@
 }
 
 .navbar-nav > a:hover {
-  background-color: rgba(0, 0, 0, 0.287);
+  background: rgba(52, 29, 232, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4.5px);
+  -webkit-backdrop-filter: blur(4.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   /* padding: 0.3em; */
   border-radius: 10px 100px / 100px;
 }
@@ -17,10 +22,10 @@
   padding: 0vw !important;
 }
 
-.textLogo,carouselTitle{
-    color: rgb(58, 58, 185) !important;
+.textLogo,
+carouselTitle {
+  color: rgb(58, 58, 185) !important;
 }
-
 
 .carouselTitle {
   padding: 0.5em;
@@ -159,10 +164,6 @@ footer {
   width: 3em;
   padding: 0.5em;
 }
-
-/* h5{
-      margin-bottom: 0px!important;
-  } */
 
 .otherPage {
   min-height: 10em;
