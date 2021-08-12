@@ -22,8 +22,7 @@
   padding: 0vw !important;
 }
 
-.textLogo,
-carouselTitle {
+.textLogo {
   color: rgb(58, 58, 185) !important;
 }
 
@@ -51,7 +50,8 @@ carouselTitle {
   margin: 14vw 40vw;
 }
 
-.contentVideo h1 {
+.contentVideo h1,
+.imgCities h1 {
   /* margin-bottom: 2rem; */
   color: rgb(47, 47, 107);
   text-shadow: 0.2rem 0.2rem #f9fbfd;
@@ -155,6 +155,8 @@ footer {
   position: relative;
   text-align: center;
   /* background-image: url('../src/assets/cieloFooter.jfif'); */
+  background-image: linear-gradient(rgba(13, 90, 134, 0.5), rgb(49, 37, 37)),
+    url("https://th.bing.com/th/id/R.77c325538c6a1865447f6916adaacd40?rik=cyNMVRg5L0x9Lw&riu=http%3a%2f%2fwallup.net%2fwp-content%2fuploads%2f2015%2f12%2f26910-anime-city-cityscape-Vancouver.jpg&ehk=%2fA6Pm6YDM5%2frT5qbak0HC3XRcVymai6lXx4p7jm6Ttk%3d&risl=&pid=ImgRaw&r=0");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -173,10 +175,63 @@ footer {
   align-items: center;
 }
 
+/*CITI PAGE*/
+
+.imgCities {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: linear-gradient(rgba(26, 35, 41, 0.2), rgb(49, 37, 37)),
+    url("https://republicadominicanalive.com/wp-content/uploads/2020/11/playa-bayahibe.jpg");
+  background-attachment: fixed;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 25rem;
+}
+
+.cityCard {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 2em; 
+  width: 35vw;
+  height: 25vw;
+}
+
+.cityCard:hover{
+    /* background-image: linear-gradient(rgba(13, 90, 134, 0.5), rgb(49, 37, 37)) ;*/
+    border-radius:2em; 
+    /* transition:transform 1s,background-color .5s,-webkit-transform 1s */
+    transition: transform 1s,background-color .5s,-webkit-transform 1s;
+    -webkit-transform: scale(1.08);
+    transform: scale(1.08);
+    background-color: #494949;
+    background-blend-mode: soft-light;
+}
+
+.cityTitle{
+    color: #e2ceb5;
+    color: var(--main-bg-color);
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.308); 
+    transition: background-color .5s;
+    text-align: center;
+}
+
 @media only screen and (max-width: 601px) {
   .photo {
     width: 50vw;
     height: 50vw;
     margin: 1em;
+  }
+  .cityCard {
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 2em; 
+    width: 80vw;
+    height: 35vw;
   }
 }

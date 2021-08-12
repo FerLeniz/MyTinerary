@@ -19,20 +19,8 @@ const Header = () => {
           className="d-lg-flex justify-content-end text-center me-5"
         >
           <Nav className="ml-auto ">
-            <NavLink
-              to="/"
-              className="fw-bolder mx-4 fs-5 text-dark text-decoration-none"
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/cities"
-              className="fw-bolder mx-4 fs-5 text-dark text-decoration-none"
-            >
-              Cities
-            </NavLink>
-            <NavDropdown
-              className="d-sm-flex flex-column align-items-center justify-content-center"
+          <NavDropdown
+              className=""
               title={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -56,6 +44,19 @@ const Header = () => {
                 <NavLink to="/notFound">Sign up</NavLink>
               </div>
             </NavDropdown>
+            <NavLink
+              to="/"
+              className="fw-bolder mx-4 fs-5 text-dark text-decoration-none"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/cities"
+              className="fw-bolder mx-4 fs-5 text-dark text-decoration-none"
+            >
+              Cities
+            </NavLink>
+            
           </Nav>
         </Navbar.Collapse>
       </Navbar>

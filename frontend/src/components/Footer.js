@@ -3,7 +3,7 @@ import Gify from "../assets/cameraFooter-unscreen.gif";
 
 const Footer = () => {
   return (
-    <footer className="container-fluid shadow bg-primary bg-gradient">
+    <footer className="container-fluid shadow ">
       <div className="row">
         <div className="col-sm-12 col-lg-4">
           <ul>
