@@ -1,17 +1,14 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Row from "react-bootstrap/Row";
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import img from "../assets/giphyTourist.gif";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Loader from '../components/Loader'
+import Loader from "../components/Loader";
 
 AOS.init();
 
@@ -35,7 +32,14 @@ export default class Cities extends React.Component {
             loading: false,
           });
         } else {
-          toast.error(res.data.response, {
+          console.error(res.data.response);
+          throw new Error("Cities not found");
+        }
+      })
+      .catch((error) => {
+        toast.error(
+          error.message.includes("Cities") ? error.message : "Failed to fetch",
+          {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -43,18 +47,10 @@ export default class Cities extends React.Component {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            });
-        }
-      })
-      .catch((error) => toast.error(error.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        }));
+          }
+        )
+        this.props.history.push('/')
+      });
   }
 
   render() {
@@ -62,7 +58,7 @@ export default class Cities extends React.Component {
       return (
         <>
           <Header />
-          <Loader/>
+          <Loader />
           <Footer />
         </>
       );
@@ -83,24 +79,18 @@ export default class Cities extends React.Component {
 
     return (
       <>
-      <ToastContainer />
+        
         <Header />
         <div className="imgCities d-flex justify-content-end container-fluid text-center">
           <h1 className="mb-5 animate__animated animate__rubberBand">
-            Find cities!
+            Discover the world with us!
           </h1>
-          <Row className="shadow my-2 ">
-            <Form.Label column="lg" lg={2} className=""></Form.Label>
-            <Col>
-              <Form.Control
-                className="shadow"
-                size="md"
-                type="text"
-                placeholder="► Search a city..."
-                onChange={filterCountry}
-              />
-            </Col>
-          </Row>
+          <input
+            type="text"
+            className="css-input"
+            onChange={filterCountry}
+            placeholder="search a city..."
+          />
         </div>
         <div className=" container-fluid ">
           <div className="row my-3 ">

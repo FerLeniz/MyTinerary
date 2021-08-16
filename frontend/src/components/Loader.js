@@ -5,7 +5,7 @@ const Loader =()=>{
         <>
         <div className="d-flex justify-content-center align-items-center flex-column">
             <h1 className="animate__animated animate__flash">Loading...</h1>
-            <img src={imgLoading} alt="this is error search" />
+            <img className="w-50" src={imgLoading} alt="this is error search" />
           </div>
         </>
     )

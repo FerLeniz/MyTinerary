@@ -46,8 +46,7 @@
   margin: 14vw 40vw;
 }
 
-.contentVideo h1,
-.imgCities h1 {
+.contentVideo h1{
   /* margin-bottom: 2rem; */
   color: rgb(47, 47, 107);
   text-shadow: 0.2rem 0.2rem #f9fbfd;
@@ -216,6 +215,25 @@ footer {
   text-align: center;
 }
 
+.css-input {
+  margin-bottom: 2rem;
+  padding: 0.1rem;
+  font-size:3vw;
+  border-width: 0.5vw;
+  border-color: rgba(7, 13, 99, 0.8);
+  background-color: #FFFFFF;
+  color: #030303;
+  border-style: outset;
+  border-radius: 1rem;
+  box-shadow: 0.5rem 0.5rem 0.5rem rgba(223,194,194,.75);
+  text-shadow: 0px 0px 1rem rgba(66,66,66,.75);
+  text-align: center;
+}
+.css-input:focus {
+  outline:none;
+  text-align: center;
+}
+
 /* City Page */
 .imgCity {
   display: flex;
@@ -229,14 +247,15 @@ footer {
   min-height: 25rem;
 }
 
-.imgCity h1 {
+.imgCity h1,
+.imgCities h1 {
   color: rgb(255, 255, 255);
   text-shadow: 0.2rem 0.2rem rgb(47, 47, 107);
-  font-size: 9vw;
+  font-size: 6vw;
   font-family: "Lobster", cursive;
 }
 
-@media only screen and (max-width: 601px) {
+@media only screen and (max-width: 767px) {
   .photo {
     width: 50vw;
     height: 50vw;
@@ -249,5 +268,19 @@ footer {
     border-radius: 2em;
     width: 80vw;
     height: 35vw;
+  }
+  .css-input {
+    margin-bottom: 2rem;
+    padding: 0.1rem;
+    font-size:6vw;
+    border-width: 0.5vw;
+    border-color: rgba(7, 13, 99, 0.8);
+    background-color: #FFFFFF;
+    color: #030303;
+    border-style: outset;
+    border-radius: 1rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem rgba(223,194,194,.75);
+    text-shadow: 0px 0px 1rem rgba(66,66,66,.75);
+    text-align: center;
   }
 }

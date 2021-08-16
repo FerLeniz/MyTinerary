@@ -1,5 +1,9 @@
 import Carousel from "react-bootstrap/Carousel";
 import { useState } from "react"
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+AOS.init();
 
 const Carusel = ({cities}) => {
   const [index, setIndex] = useState(0);
@@ -10,7 +14,7 @@ const Carusel = ({cities}) => {
 
   return (
     <>
-      <h2 className="text-center carouselTitle fs-1 animate__animated animate__rubberBand animate__delay-5s">Popular MYtineraries</h2>
+      <h2 className="text-center carouselTitle fs-1 " data-aos="fade-up">Popular MYtineraries</h2>
       <Carousel fade activeIndex={index} onSelect={handleSelect}>
         {cities.map((cityGroup, index) => {
           return (

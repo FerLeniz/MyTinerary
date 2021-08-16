@@ -31,8 +31,9 @@ const citiesController = {
   },
   modifyCity: (req, res) => {
     City.findOneAndUpdate({ _id: req.params.id }, { ...req.body }).then(() =>
-      res.json({ success: true })
-      .catch((err) => res.json({success: false,response:err}))
+      res
+        .json({ success: true })
+        .catch((err) => res.json({ success: false, response: err }))
     );
   },
   deleteCity: (req, res) => {

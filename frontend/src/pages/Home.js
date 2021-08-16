@@ -5,6 +5,7 @@ import TextAndVideo from "../components/TextAndVideo";
 import Hero from "../components/Hero";
 import Carusel from "../components/Carousel";
 import Footer from "../components/Footer";
+import { ToastContainer} from "react-toastify";
 
 export default class Home extends React.Component {
   toTop = () => {
@@ -104,6 +105,7 @@ export default class Home extends React.Component {
     return (
       <>
         <Header />
+        <ToastContainer />
         <TextAndVideo />
         <Hero />
         <Carusel cities={this.arrayCities} />

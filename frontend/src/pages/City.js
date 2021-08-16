@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Loader from '../components/Loader'
+import Loader from "../components/Loader";
 
 export default class City extends React.Component {
   state = {
@@ -33,19 +33,12 @@ export default class City extends React.Component {
             loading: false,
           });
         } else {
-          toast.error(res.data.response, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          console.error(res.data.response)
+          throw new Error("City not found" )
         }
       })
-      .catch((error) =>
-        toast.error(error.message, {
+      .catch((error) => {
+        toast.error(error.message.includes('City')?error.message:'Failed to fetch', {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -53,8 +46,9 @@ export default class City extends React.Component {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        })
-      );
+        });
+        this.props.history.push("/cities");
+      });
   }
 
   render() {
@@ -80,18 +74,18 @@ export default class City extends React.Component {
         >
           <h1>Welcome to {this.state.nameCity}</h1>
           <p className="text-center text-white fst-italic">
-            {this.state.descCity }
+            {this.state.descCity}
           </p>
         </div>
         <div className="otherPage bg-warning d-flex flex-column justify-content-center">
           <h1 className="text-dark fs-bold">Under construction...</h1>
           <Link to="/Cities">
             <Button
-              className="my-3 py-3 px-2 shadow "
+              className="my-3 py-1 px-2 shadow bg-gradient"
               variant="primary"
               size="lg"
             >
-              Back to Cities
+              <p className="fs-2 ">Back to Cities</p>
             </Button>{" "}
           </Link>
         </div>
