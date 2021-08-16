@@ -10,22 +10,22 @@ const Footer = () => {
             <li className="list-unstyled mt-3">
               <h3>Menu</h3>
             </li>
-            <Link to="/">
+            <Link to="/" className="text-decoration-none text-white">
               <li className="list-unstyled fs-5 text-decoration-none text-white">
                 Home
               </li>
             </Link>
-            <Link to="/Cities">
+            <Link to="/Cities" className="text-decoration-none text-white">
               <li className="list-unstyled fs-5 text-decoration-none text-white">
                 Cities
               </li>
             </Link>
-            <Link to="/notFound">
+            <Link to="/notFound" className="text-decoration-none text-white">
               <li className="list-unstyled fs-5 text-decoration-none text-white">
                 Sign in
               </li>
             </Link>
-            <Link to="/notFound">
+            <Link to="/notFound" className="text-decoration-none text-white">
               <li className="list-unstyled fs-5 text-decoration-none text-white">
                 Sign up
               </li>

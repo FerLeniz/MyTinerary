@@ -8,14 +8,10 @@
 }
 
 .navbar-nav > a:hover {
-  background: rgba(52, 29, 232, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4.5px);
-  -webkit-backdrop-filter: blur(4.5px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  /* padding: 0.3em; */
   border-radius: 10px 100px / 100px;
+  background-color: rgba(0, 0, 0, 0.308); 
+  transition: background-color .5s;
 }
 
 .nav-link {
@@ -175,7 +171,7 @@ footer {
   align-items: center;
 }
 
-/*CITI PAGE*/
+/*CITIES PAGE*/
 
 .imgCities {
   display: flex;
@@ -195,29 +191,49 @@ footer {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 2em; 
+  border-radius: 2em;
   width: 35vw;
   height: 25vw;
 }
 
-.cityCard:hover{
-    /* background-image: linear-gradient(rgba(13, 90, 134, 0.5), rgb(49, 37, 37)) ;*/
-    border-radius:2em; 
-    /* transition:transform 1s,background-color .5s,-webkit-transform 1s */
-    transition: transform 1s,background-color .5s,-webkit-transform 1s;
-    -webkit-transform: scale(1.08);
-    transform: scale(1.08);
-    background-color: #494949;
-    background-blend-mode: soft-light;
+.cityCard:hover {
+  /* background-image: linear-gradient(rgba(13, 90, 134, 0.5), rgb(49, 37, 37)) ;*/
+  border-radius: 2em;
+  /* transition:transform 1s,background-color .5s,-webkit-transform 1s */
+  transition: transform 1s, background-color 0.5s, -webkit-transform 1s;
+  -webkit-transform: scale(1.08);
+  transform: scale(1.08);
+  background-color: #494949;
+  background-blend-mode: soft-light;
 }
 
-.cityTitle{
-    color: #e2ceb5;
-    color: var(--main-bg-color);
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.308); 
-    transition: background-color .5s;
-    text-align: center;
+.cityTitle {
+  background-color: #f68b10;
+  color: #e2ceb5;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.308);
+  transition: background-color 0.5s;
+  text-align: center;
+}
+
+/* City Page */
+.imgCity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-attachment: fixed;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 25rem;
+}
+
+.imgCity h1 {
+  color: rgb(255, 255, 255);
+  text-shadow: 0.2rem 0.2rem rgb(47, 47, 107);
+  font-size: 9vw;
+  font-family: "Lobster", cursive;
 }
 
 @media only screen and (max-width: 601px) {
@@ -230,7 +246,7 @@ footer {
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 2em; 
+    border-radius: 2em;
     width: 80vw;
     height: 35vw;
   }

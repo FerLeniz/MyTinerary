@@ -1,0 +1,29 @@
+{
+  "name": "mytinerary-leniz",
+  "version": "1.0.0",
+  "description": "server.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FerLeniz/MyTinerary.git"
+  },
+  "keywords": [
+    "frontend"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FerLeniz/MyTinerary/issues"
+  },
+  "homepage": "https://github.com/FerLeniz/MyTinerary#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.7"
+  }
+}

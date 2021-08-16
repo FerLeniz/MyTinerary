@@ -10,7 +10,7 @@ const Header = () => {
       <Navbar bg="light" expand="md">
         <img className="imgNav" src={logo} alt="logo" />
         {/* <Image src={logo} thumbnail /> */}
-        <Navbar.Brand className="textLogo fw-bolder animate__animated animate__rollIn">
+        <Navbar.Brand className="textLogo fw-bolder animate__animated animate__rubberBand">
           MyTinerary
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3" />
@@ -40,8 +40,8 @@ const Header = () => {
               id="basic-nav-dropdown"
             >
               <div className=" w-50 d-flex flex-column align-items-center justify-content-center">
-                <NavLink to="/notFound">Sign in</NavLink>
-                <NavLink to="/notFound">Sign up</NavLink>
+                <NavLink to="/notFound" className="text-decoration-none text-dark">Sign in</NavLink>
+                <NavLink to="/notFound" className="text-decoration-none text-dark">Sign up</NavLink>
               </div>
             </NavDropdown>
             <NavLink
