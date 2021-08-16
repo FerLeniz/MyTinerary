@@ -8,4 +8,3 @@ mongoose
     useFindAndModify: false,
   })
 
-  .then();

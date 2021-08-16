@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import img from "../assets/giphyTourist.gif";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { toast } from "react-toastify";
+import { ToastContainer,toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
 
@@ -79,7 +79,7 @@ export default class Cities extends React.Component {
 
     return (
       <>
-        
+        <ToastContainer />
         <Header />
         <div className="imgCities d-flex justify-content-end container-fluid text-center">
           <h1 className="mb-5 animate__animated animate__rubberBand">

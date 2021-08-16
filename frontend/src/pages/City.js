@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
 
@@ -64,7 +64,7 @@ export default class City extends React.Component {
 
     return (
       <>
-        <ToastContainer />
+        
         <Header />
         <div
           className="imgCity "
