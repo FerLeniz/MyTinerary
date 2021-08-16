@@ -12,4 +12,4 @@ app.use(cors())
  app.use('/api',router)
 
 
-app.listen(4000,()=>console.log('The server is listening! now'))
+app.listen(4000,()=>console.log('The server is listening!'))
