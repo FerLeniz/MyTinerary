@@ -11,43 +11,39 @@ const citiesController = {
   getOneCity: (req, res) => {
     City.findOne({ _id: req.params.id })
       .then((city) => {
-        if(city){
+        if (city) {
           res.json({ success: true, response: city });
-        }else{
-          throw new Error('City not found')
+        } else {
+          throw new Error("City not found");
         }
-        
       })
       .catch((error) => res.json({ success: false, response: error.message }));
   },
   uploadCity: (req, res) => {
-    const cityToLoad = new City({
-      name: req.body.name,
-      image: req.body.image,
-      country: req.body.country,
-      currentMoney: req.body.currentMoney,
-      language: req.body.language,
-      description: req.body.description,
-    });
+    const cityToLoad = new City({ ...req.body });
     cityToLoad
       .save()
       .then(() => res.json({ success: true }))
       .catch((err) => res.json({ success: false, error: err }));
   },
   modifyCity: (req, res) => {
-    City.findOneAndUpdate({ _id: req.params.id }, { ...req.body })
+    City.findOneAndUpdate(
+      { _id: req.params.id },
+      { ...req.body },
+      { new: true }
+    )
       .then(() => res.json({ success: true }))
       .catch((err) => res.json({ success: false, response: err }));
   },
   deleteCity: (req, res) => {
     City.findOneAndDelete({ _id: req.params.id })
-      .then((city) =>{
-        if(city){
-          res.json({ success: true })   
-        }else{
-          throw new Error('the city doesn´t exits...')
+      .then((city) => {
+        if (city) {
+          res.json({ success: true });
+        } else {
+          throw new Error("the city doesn´t exits...");
         }
-      }) 
+      })
       .catch((err) => res.json({ success: false, response: err.message }));
   },
 };
