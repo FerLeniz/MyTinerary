@@ -4,9 +4,13 @@ const citiesController = {
   getAllCities: (req, res) => {
     City.find()
       .then((city) => {
-        res.json({ success: true, response: city });
+        if (city.length > 0) {
+          res.json({ success: true, response: city });
+        } else {
+          throw new Error("There are noy cities");
+        }
       })
-      .catch((err) => res.json({ success: false, response: err }));
+      .catch((err) => res.json({ success: false, response: err.message }));
   },
   getOneCity: (req, res) => {
     City.findOne({ _id: req.params.id })
