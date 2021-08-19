@@ -1,6 +1,7 @@
 const express=require('express')
 const router=express.Router()
 const citiesController=require('../controller/citiesControllers')
+itinerariesController=require('../controller/itinerariesController')
 
 router.route('/dataCities')
 .get(citiesController.getAllCities)
@@ -10,6 +11,15 @@ router.route('/city/:id')
 .get(citiesController.getOneCity)
 .delete(citiesController.deleteCity)
 .put(citiesController.modifyCity)
+
+router.route('/itineraries')
+ .get(itinerariesController.getAllItineraries)
+ .post(itinerariesController.addItinerary)
+
+router.route('/itinerary/:id')
+// .get(itinerariesController)
+// .delete(itinerariesController)
+// .put(itinerariesController)
 
 module.exports = router
 

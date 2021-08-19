@@ -16,7 +16,7 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3" />
         <Navbar.Collapse
           id="basic-navbar-nav "
-          className="d-lg-flex justify-content-end text-center me-5"
+          className="d-lg-flex justify-content-end text-center "
         >
           <Nav className="ml-auto ">
           <NavDropdown
@@ -39,9 +39,9 @@ const Header = () => {
               }
               id="basic-nav-dropdown"
             >
-              <div className=" w-50 d-flex flex-column align-items-center justify-content-center">
-                <NavLink to="/notFound" className="text-decoration-none text-dark">Sign in</NavLink>
-                <NavLink to="/notFound" className="text-decoration-none text-dark">Sign up</NavLink>
+              <div className="  d-flex flex-column align-items-center justify-content-center">
+                <NavLink to="/signin" className="text-decoration-none text-dark">Sign in</NavLink>
+                <NavLink to="/signup" className="text-decoration-none text-dark">Sign up</NavLink>
               </div>
             </NavDropdown>
             <NavLink

@@ -3,16 +3,25 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
+import Itineraries from '../components/Itineraries';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faGlobeAmericas,
+  faLanguage,
+  faCoins,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default class City extends React.Component {
   state = {
     nameCity: "",
     imgCity: "",
     descCity: "",
+    languageCity: "",
+    countryCity: "",
+    moneyCity: "",
     loading: true,
   };
 
@@ -20,33 +29,43 @@ export default class City extends React.Component {
     axios
       .get(`http://localhost:4000/api/city/${this.props.match.params.id}`)
       .then((res) => {
-        const respAxios = res.data.response;
-        const imgCity = respAxios.image;
-        const nameCity = respAxios.name;
-        const descCity = respAxios.description;
+        const {
+          country,
+          currentMoney,
+          name,
+          description,
+          language,
+          image,
+        } = res.data.response;
 
         if (res.data.success) {
           this.setState({
-            nameCity: nameCity,
-            imgCity: imgCity,
-            descCity: descCity,
+            nameCity: name,
+            imgCity: image,
+            descCity: description,
+            languageCity: language,
+            countryCity: country,
+            moneyCity: currentMoney,
             loading: false,
           });
         } else {
-          console.error(res.data.response)
-          throw new Error("City not found" )
+          console.error(res.data.response);
+          throw new Error("City not found");
         }
       })
       .catch((error) => {
-        toast.error(error.message.includes('City')?error.message:'Failed to fetch', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(
+          error.message.includes("City") ? error.message : "Failed to fetch",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
         this.props.history.push("/cities");
       });
   }
@@ -64,7 +83,6 @@ export default class City extends React.Component {
 
     return (
       <>
-        
         <Header />
         <div
           className="imgCity "
@@ -77,19 +95,30 @@ export default class City extends React.Component {
             {this.state.descCity}
           </p>
         </div>
-        <div className="otherPage bg-warning d-flex flex-column justify-content-center">
-          <h1 className="text-dark fs-bold">Under construction...</h1>
+        <div className="container text-center my-3">
+          <div className="row">
+            <div className="col-sm-12 col-md-4 my-3">
+              <FontAwesomeIcon icon={faCoins} className="europeSvg" />
+              <h3>{this.state.moneyCity}</h3>
+            </div>
+            <div className="col-sm-12 col-md-4 my-3">
+              <FontAwesomeIcon icon={faGlobeAmericas} className="europeSvg" />
+              <h3>{this.state.countryCity}</h3>
+            </div>
+            <div className="col-sm-12 col-md-4 my-3">
+              <FontAwesomeIcon icon={faLanguage} className="europeSvg" />
+              <h3>{this.state.languageCity}</h3>
+            </div>
+          </div>
+          <Itineraries/>
+        </div>
+        <div className="col-12 d-flex justify-content-center">
           <Link to="/Cities">
-            <Button
-              className="my-3 py-1 px-2 shadow bg-gradient"
-              variant="primary"
-              size="lg"
-            >
-              <p className="fs-2 ">Back to Cities</p>
-            </Button>{" "}
+            <button className="my-3 py-2 px-5  goldenButton">
+              <p className="fs-3 ">Back to Cities</p>
+            </button>
           </Link>
         </div>
-
         <Footer />
       </>
     );

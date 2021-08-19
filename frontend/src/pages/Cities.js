@@ -92,8 +92,8 @@ export default class Cities extends React.Component {
             placeholder="search a city..."
           />
         </div>
-        <div className=" container-fluid ">
-          <div className="row my-3 ">
+        <div className=" container-fluid linearBack">
+          <div className="row">
             {this.state.actualArr.length === 0 ? (
               <div className="d-flex justify-content-center align-items-center flex-column">
                 <h1>Oops! There are not results for your search</h1>
@@ -107,11 +107,11 @@ export default class Cities extends React.Component {
                     data-aos="zoom-in"
                     key={city._id}
                     to={`/city/${city._id}`}
-                    className="col-md-6 col-sm-12 my-3 text-decoration-none"
+                    className="col-md-6 col-sm-12 py-4 text-decoration-none"
                   >
-                    <div className=" d-flex justify-content-center shadow">
+                    <div className=" d-flex justify-content-center ">
                       <div
-                        className="cityCard d-flex align-items-center"
+                        className="cityCard d-flex align-items-center shadow"
                         style={{
                           backgroundImage: `url(${city.image})`,
                         }}
