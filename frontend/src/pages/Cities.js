@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import img from "../assets/giphyTourist.gif";
 import AOS from "aos";
@@ -9,73 +8,28 @@ import "aos/dist/aos.css";
 import { ToastContainer,toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
+import { connect } from 'react-redux'
+import citiesActions from '../redux/actions/citiesActions'
 
 AOS.init();
 
-export default class Cities extends React.Component {
-  state = {
-    firstArr: [],
-    actualArr: [],
-    loading: true,
-  };
+class Cities extends React.Component {
+  toTop= () => {window.scroll({
+    top:0, 
+    left:0,
+})}
 
   componentDidMount() {
-    axios
-      .get("http://localhost:4000/api/dataCities")
-      .then((res) => {
-        const arr = res.data.response;
-
-        if (res.data.response) {
-          this.setState({
-            firstArr: [...arr],
-            actualArr: arr,
-            loading: false,
-          });
-        } else {
-          console.error(res.data.response);
-          throw new Error("Cities not found");
-        }
-      })
-      .catch((error) => {
-        toast.error(
-          error.message.includes("Cities") ? error.message : "Failed to fetch",
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          }
-        )
-        this.props.history.push('/')
-      });
+    this.toTop()
+     this.props.getCities()
   }
 
   render() {
-    if (this.state.loading) {
-      return (
-        <>
-          <Header />
-          <Loader />
-          <Footer />
-        </>
-      );
-    }
-
-    //onChange event
-    const filterCountry = (e) => {
-      let inputName = e.target.value;
-
-      this.setState({
-        actualArr: this.state.firstArr.filter((city) => {
-          return city.name
-            .toLowerCase()
-            .startsWith(inputName.trim().toLowerCase());
-        }),
-      });
-    };
+  //   if (this.props.allCitiesArr.length === 0) {
+  //    return(
+  //         <Loader />
+  //     )
+  //  } 
 
     return (
       <>
@@ -88,20 +42,20 @@ export default class Cities extends React.Component {
           <input
             type="text"
             className="css-input"
-            onChange={filterCountry}
+            onChange={(e)=>this.props.filterCities(e)}
             placeholder="search a city..."
           />
         </div>
         <div className=" container-fluid linearBack">
           <div className="row">
-            {this.state.actualArr.length === 0 ? (
+            {this.props.allCitiesArr.length === 0 ? (
               <div className="d-flex justify-content-center align-items-center flex-column">
                 <h1>Oops! There are not results for your search</h1>
                 <h2>Try another one!</h2>
                 <img src={img} alt="this is error search" />
               </div>
             ) : (
-              this.state.actualArr.map((city) => {
+              this.props.allCitiesArr.map((city) => {
                 return (
                   <Link
                     data-aos="zoom-in"
@@ -132,6 +86,19 @@ export default class Cities extends React.Component {
     );
   }
 }
+
+const mapStateToProps=(state)=>{
+  return{
+    allCitiesArr:state.cities.allCitiesArr
+  }
+}
+
+const mapDispatchToProps = {
+  getCities: citiesActions.getAllCities,
+  filterCities:citiesActions.filterCities
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Cities)
 
 // PARA SOLUCIONAR EL ERROR DE ESLINT, en el useEffect, para decirle que la props no va a cambiar
 // eslint-disable-next-line react-hooks/exhaustive-deps
