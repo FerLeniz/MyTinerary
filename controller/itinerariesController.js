@@ -31,6 +31,24 @@ const itinerarisControllers = {
       })
       .catch((err) => res.json({ success: false, response: err.message }));
   },
+  modifyItinerary: (req, res) => {
+    Itinerary.findOneAndUpdate(
+      { cityId: req.params.id },
+      { ...req },
+      { new: true }
+    )
+      .then(() => res.json({ success: true }))
+      .catch((err) => res.json({ success: false, response: err.message }));
+  },
+  deleteItinerary: (req, res) => {
+    Itinerary.findOneAndDelete({ cityId: req.params.id }).then((itinerary) => {
+      if (itinerary) {
+        res.json({ success: true });
+      } else {
+        throw new Error("The itinerary doesn´t exists");
+      }
+    });
+  },
 };
 
 module.exports = itinerarisControllers;

@@ -1,9 +1,8 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
 import Itinerary from "../components/Itinerary";
@@ -16,13 +15,13 @@ import {
 import { connect } from "react-redux";
 import citiesActions from "../redux/actions/citiesActions";
 import itineraryActions from "../redux/actions/itineraryActions";
+import imgItinerary from "../assets/itineraryNotFound.png";
 
 class City extends React.Component {
   state = {
     loading: true,
   };
 
-  // state = { idCity:{city: null,loading: true} };
   componentDidMount() {
     this.setState({
       loading: false,
@@ -65,8 +64,18 @@ class City extends React.Component {
               <h3>{this.props.oneCity.language}</h3>
             </div>
           </div>
-          {this.props.showItineraries.length === 0 ? (
-            <div>No itineraries found </div>
+          {this.props.showItineraries === "There are not itineraries" ? (
+            <div>
+              <img
+                className="w-50"
+                src={imgItinerary}
+                alt="Itinerary not found"
+              />
+              <h2>
+                Oh! It seems that there are not itineraries for this city yet!
+              </h2>
+              <h3>Please, feel free to post the first one!</h3>
+            </div>
           ) : (
             this.props.showItineraries.map((itinerary) => (
               <Itinerary key={itinerary._id} itinerary={itinerary} />
@@ -101,45 +110,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(City);
-
-// axios
-//   .get(`http://localhost:4000/api/city/${this.props.match.params.id}`)
-//   .then((res) => {
-//     const {
-//       country,
-//       currentMoney,
-//       name,
-//       description,
-//       language,
-//       image,
-//     } = res.data.response;
-//     if (res.data.success) {
-//       this.setState({
-//         nameCity: name,
-//         imgCity: image,
-//         descCity: description,
-//         languageCity: language,
-//         countryCity: country,
-//         moneyCity: currentMoney,
-//         loading: false,
-//       });
-//     } else {
-//       console.error(res.data.response);
-//       throw new Error("City not found");
-//     }
-//   })
-//   .catch((error) => {
-//     toast.error(
-//       error.message.includes("City") ? error.message : "Failed to fetch",
-//       {
-//         position: "top-right",
-//         autoClose: 5000,
-//         hideProgressBar: false,
-//         closeOnClick: true,
-//         pauseOnHover: true,
-//         draggable: true,
-//         progress: undefined,
-//       }
-//     );
-//     this.props.history.push("/cities");
-//   });

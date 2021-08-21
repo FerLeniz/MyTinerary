@@ -194,9 +194,7 @@ footer {
 }
 
 .cityCard:hover {
-  /* background-image: linear-gradient(rgba(13, 90, 134, 0.5), rgb(49, 37, 37)) ;*/
   border-radius: 2em;
-  /* transition:transform 1s,background-color .5s,-webkit-transform 1s */
   transition: transform 1s, background-color 0.5s, -webkit-transform 1s;
   -webkit-transform: scale(1.08);
   transform: scale(1.08);
@@ -259,7 +257,6 @@ footer {
 
 /*ITINERARY*/
 .imgItinerary {
-  /* background-image: url("https://photo980x880.mnstatic.com/e9/65/e965c67fbfe5c13105333daf4204ec06.jpg"); */
   width: 20vw;
   height: 25vw;
   background-position: 50%;
@@ -288,6 +285,18 @@ footer {
     text-shadow: 0.1rem 0.1rem #f9fbfd;
 }
 
+.titleItinerary{
+  background: rgba(52, 29, 232, 0.25);
+}
+
+.money{
+  font-size: 2rem;
+}
+
+.transitions{
+  display:block;
+  transition-delay: 1s;
+}
 @media only screen and (max-width: 767px) {
   .photo {
     width: 50vw;

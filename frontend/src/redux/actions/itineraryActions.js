@@ -2,7 +2,7 @@ import axios from "axios";
 
 const itineraryActions = {
   getItineraries: (id) => {
-    return (dispatch, getState) => {
+    return (dispatch) => {
       axios
         .get("http://localhost:4000/api/itineraries/" + id)
         .then((res) => {

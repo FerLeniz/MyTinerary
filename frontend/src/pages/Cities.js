@@ -2,34 +2,36 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
-import img from "../assets/giphyTourist.gif";
+import img from "../assets/cityNotFound.gif";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { ToastContainer,toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Loader from "../components/Loader";
-import { connect } from 'react-redux'
-import citiesActions from '../redux/actions/citiesActions'
+// import Loader from "../components/Loader";
+import { connect } from "react-redux";
+import citiesActions from "../redux/actions/citiesActions";
 
 AOS.init();
 
 class Cities extends React.Component {
-  toTop= () => {window.scroll({
-    top:0, 
-    left:0,
-})}
+  toTop = () => {
+    window.scroll({
+      top: 0,
+      left: 0,
+    });
+  };
 
   componentDidMount() {
-    this.toTop()
-     this.props.getCities()
+    this.toTop();
+    this.props.getCities();
   }
 
   render() {
-  //   if (this.props.allCitiesArr.length === 0) {
-  //    return(
-  //         <Loader />
-  //     )
-  //  } 
+    //   if (this.props.allCitiesArr.length === 0) {
+    //    return(
+    //         <Loader />
+    //     )
+    //  }
 
     return (
       <>
@@ -42,7 +44,7 @@ class Cities extends React.Component {
           <input
             type="text"
             className="css-input"
-            onChange={(e)=>this.props.filterCities(e)}
+            onChange={(e) => this.props.filterCities(e)}
             placeholder="search a city..."
           />
         </div>
@@ -87,18 +89,18 @@ class Cities extends React.Component {
   }
 }
 
-const mapStateToProps=(state)=>{
-  return{
-    allCitiesArr:state.cities.allCitiesArr
-  }
-}
+const mapStateToProps = (state) => {
+  return {
+    allCitiesArr: state.cities.allCitiesArr,
+  };
+};
 
 const mapDispatchToProps = {
   getCities: citiesActions.getAllCities,
-  filterCities:citiesActions.filterCities
-}
+  filterCities: citiesActions.filterCities,
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(Cities)
+export default connect(mapStateToProps, mapDispatchToProps)(Cities);
 
 // PARA SOLUCIONAR EL ERROR DE ESLINT, en el useEffect, para decirle que la props no va a cambiar
 // eslint-disable-next-line react-hooks/exhaustive-deps
