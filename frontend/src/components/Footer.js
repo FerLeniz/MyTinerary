@@ -15,7 +15,7 @@ const Footer = () => {
                 Home
               </li>
             </Link>
-            <Link to="/Cities" className="text-decoration-none text-white">
+            <Link to="/cities" className="text-decoration-none text-white">
               <li className="list-unstyled fs-5 text-decoration-none text-white">
                 Cities
               </li>
