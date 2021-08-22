@@ -13,7 +13,7 @@ const Hero = () => {
         their cities..."
       </h1>
       <h2 className="my-3" data-aos="fade-left">Hey! discover your favourite place</h2>
-      <Link to="/Cities" data-aos="fade-left">
+      <Link to="/cities" data-aos="fade-left">
         <button className="my-3 py-2 px-5  goldenButton" data-aos="flip-up">
           <p className="fs-3 ">Click here</p>
         </button>

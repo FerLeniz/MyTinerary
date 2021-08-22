@@ -27,7 +27,7 @@ class City extends React.Component {
     const idCityRoute = this.props.match.params.id;
 
     this.props.getItineraries(idCityRoute);
-    console.log(this.props)
+    
     if (this.props.allCities.length > 0 && this.props.showItineraries.length >0) {
       this.setState({
         loading: false,
