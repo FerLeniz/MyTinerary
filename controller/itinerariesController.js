@@ -20,7 +20,7 @@ const itinerarisControllers = {
       .catch((err) => res.json({ success: false, response: err.message }));
   },
   getSpecificItineraries: (req, res) => {
-    Itinerary.find({ cityId: req.params.id })
+    Itinerary.find({cityId: req.params.cityId})
       .populate("cityId")
       .then((itinerary) => {
         if (itinerary.length > 0) {
@@ -31,9 +31,21 @@ const itinerarisControllers = {
       })
       .catch((err) => res.json({ success: false, response: err.message }));
   },
+  getOneItinerary: (req, res) => {
+    Itinerary.findOne({ _id: req.params.id })
+      .then((itinerary) => {
+        if (itinerary) {
+          res.json({ success: true, response: itinerary });
+        } else {
+          console.log(itinerary)
+          throw new Error("Itinerary not found");
+        }
+      })
+      .catch((error) => res.json({ success: false, response: error.message }));
+  },
   modifyItinerary: (req, res) => {
     Itinerary.findOneAndUpdate(
-      { cityId: req.params.id },
+      { _id: req.params.id },
       { ...req },
       { new: true }
     )

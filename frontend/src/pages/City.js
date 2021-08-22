@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
-// import { toast } from "react-toastify";
+import { ToastContainer,toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
 import Itinerary from "../components/Itinerary";
@@ -20,31 +20,49 @@ import imgItinerary from "../assets/itineraryNotFound.png";
 class City extends React.Component {
   state = {
     loading: true,
+    city: {},
   };
 
   componentDidMount() {
-    this.setState({
-      loading: false,
-    });
     const idCityRoute = this.props.match.params.id;
-    this.props.findCity(idCityRoute);
+
     this.props.getItineraries(idCityRoute);
+    console.log(this.props)
+    if (this.props.allCities.length > 0 && this.props.showItineraries.length >0) {
+      this.setState({
+        loading: false,
+        city: this.props.allCities.find((city) => city._id === idCityRoute),
+      });
+    } else {
+      this.props.history.push("/cities");
+      toast.error("Failed to fetch", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   }
 
   render() {
     if (this.state.loading) {
       return <Loader />;
     }
+
     return (
       <>
+      <ToastContainer />
         <Header />
         <div
           className="imgCity "
           style={{
-            backgroundImage: `linear-gradient(rgba(26, 35, 41, 0.2), rgb(49, 37, 37)),url(${this.props.oneCity.image})`,
+            backgroundImage: `linear-gradient(rgba(26, 35, 41, 0.2), rgb(49, 37, 37)),url(${this.state.city.image})`,
           }}
         >
-          <h1>Welcome to {this.props.oneCity.name}</h1>
+          <h1>Welcome to {this.state.city.name}</h1>
           <p className="text-center text-white fst-italic">
             {this.props.descCity}
           </p>
@@ -53,15 +71,15 @@ class City extends React.Component {
           <div className="row">
             <div className="col-sm-12 col-md-4 my-3">
               <FontAwesomeIcon icon={faCoins} className="europeSvg" />
-              <h3>{this.props.oneCity.currentMoney}</h3>
+              <h3>{this.state.city.currentMoney}</h3>
             </div>
             <div className="col-sm-12 col-md-4 my-3">
               <FontAwesomeIcon icon={faGlobeAmericas} className="europeSvg" />
-              <h3>{this.props.oneCity.country}</h3>
+              <h3>{this.state.city.country}</h3>
             </div>
             <div className="col-sm-12 col-md-4 my-3">
               <FontAwesomeIcon icon={faLanguage} className="europeSvg" />
-              <h3>{this.props.oneCity.language}</h3>
+              <h3>{this.state.city.language}</h3>
             </div>
           </div>
           {this.props.showItineraries === "There are not itineraries" ? (
@@ -98,14 +116,12 @@ class City extends React.Component {
 const mapStateToProps = (state) => {
   return {
     allCities: state.cities.allCitiesArr,
-    oneCity: state.cities.foundCity,
     showItineraries: state.itinerary.itinerary,
   };
 };
 
 const mapDispatchToProps = {
   getCities: citiesActions.getAllCities,
-  findCity: citiesActions.findCity,
   getItineraries: itineraryActions.getItineraries,
 };
 

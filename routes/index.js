@@ -20,9 +20,13 @@ router
   .post(itinerariesController.addItinerary);
 
 router
-  .route("/itineraries/:id")
-  .get(itinerariesController.getSpecificItineraries)
+  .route("/itinerary/:id")
+  .get(itinerariesController.getOneItinerary)
   .delete(itinerariesController.deleteItinerary)
   .put(itinerariesController.modifyItinerary);
+
+router
+  .route("/itineraries/:cityId")
+  .get(itinerariesController.getSpecificItineraries)
 
 module.exports = router;

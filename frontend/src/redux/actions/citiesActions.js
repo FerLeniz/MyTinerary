@@ -2,27 +2,21 @@ import axios from "axios";
 
 const citiesActions = {
   getAllCities: () => {
-    return (dispatch, getState) => {
-      axios
-        .get("http://localhost:4000/api/dataCities")
-        .then((res) =>
-          dispatch({ type: "GET_ALL_CITIES", payload: res.data.response })
-        );
+    return async  (dispatch) => {
+      let resp = await axios
+      .get("http://localhost:4000/api/dataCities")
+           if (!resp.data.success) {
+             throw new Error("Backend and Database problem");
+           }
+          let status =resp.data.response
+          dispatch({ type: "GET_ALL_CITIES", payload: status });
+        
     };
   },
   filterCities: (e) => {
     let inputName = e.target.value;
-    return (dispatch, getState) => {
+    return (dispatch) => {
       dispatch({ type: "FILTER_CITIES", payload: inputName });
-    };
-  },
-  findCity: (id) => {
-    return (dispatch, getState) => {
-      axios
-        .get("http://localhost:4000/api/city/" + id)
-        .then((res) => dispatch({ type: "FIND_CITY", payload: res.data.response})
-        // .catch((err)=> console.log(err.message))
-        );
     };
   },
 };

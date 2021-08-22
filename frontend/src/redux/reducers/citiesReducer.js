@@ -1,7 +1,6 @@
 const initState = {
   allCitiesArr: [],
   filterCitArr: [],
-  foundCity: {},
 };
 
 const citiesReducer = (state = initState, action) => {
@@ -20,11 +19,6 @@ const citiesReducer = (state = initState, action) => {
             .toLowerCase()
             .startsWith(action.payload.trim().toLowerCase())
         ),
-      };
-    case "FIND_CITY":
-      return {
-        ...state,
-        foundCity: action.payload
       };
     default:
       return state;

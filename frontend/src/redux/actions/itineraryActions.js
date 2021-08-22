@@ -8,7 +8,6 @@ const itineraryActions = {
         .then((res) => {
           dispatch({ type: "GET_ITINERARIES", payload: res.data.response });
         })
-        .catch((error) => console.log(error));
     };
   },
 };

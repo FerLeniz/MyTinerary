@@ -58,10 +58,6 @@ const Itineraries = (props) => {
           <h4 className="d-flex justify-content-start ">"{sentence}"</h4>
           <div className="d-flex flex-row">
             <span className="money">{"💵".repeat(price)}</span>
-            {/* <FontAwesomeIcon
-              icon={faMoneyBillWave}
-              className="europeSvg px-1"
-            /> */}
           </div>
           <div className="d-flex flex-row align-items-center">
             <FontAwesomeIcon icon={faClock} className="europeSvg px-1" />
@@ -100,7 +96,6 @@ const Itineraries = (props) => {
           </button>
         </div>
       </div>
-    
   );
 };
 
