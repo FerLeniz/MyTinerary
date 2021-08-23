@@ -30,7 +30,7 @@ const Cities = (props) => {
       try {
         await props.getCities();
       } catch (e) {
-        toast.error("Failed to fetch", {
+        toast.error("Information not found...", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

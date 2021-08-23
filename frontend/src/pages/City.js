@@ -35,7 +35,7 @@ class City extends React.Component {
       });
     } else {
       this.props.history.push("/cities");
-      toast.error("Failed to fetch", {
+      toast.error("information not ound", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
