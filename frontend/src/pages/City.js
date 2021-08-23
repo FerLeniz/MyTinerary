@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
-import { ToastContainer,toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
 import Itinerary from "../components/Itinerary";
@@ -27,15 +27,17 @@ class City extends React.Component {
     const idCityRoute = this.props.match.params.id;
 
     this.props.getItineraries(idCityRoute);
-    
-    if (this.props.allCities.length > 0 && this.props.showItineraries.length >0) {
+
+    if (
+      this.props.allCities.length > 0 &&
+      this.props.showItineraries.length > 0
+    ) {
       this.setState({
         loading: false,
         city: this.props.allCities.find((city) => city._id === idCityRoute),
       });
     } else {
-      this.props.history.push("/cities");
-      toast.error("information not ound", {
+      toast.error("information not found", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -44,6 +46,7 @@ class City extends React.Component {
         draggable: true,
         progress: undefined,
       });
+      this.props.history.push("/cities");
     }
   }
 
@@ -54,7 +57,7 @@ class City extends React.Component {
 
     return (
       <>
-      <ToastContainer />
+        <ToastContainer />
         <Header />
         <div
           className="imgCity "
@@ -101,7 +104,7 @@ class City extends React.Component {
           )}
         </div>
         <div className="col-12 d-flex justify-content-center">
-          <Link to="/Cities">
+          <Link to="/cities">
             <button className="my-3 py-2 px-5  goldenButton">
               <p className="fs-3 ">Back to Cities</p>
             </button>
