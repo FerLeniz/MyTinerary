@@ -85,7 +85,7 @@ class City extends React.Component {
               <h3>{this.state.city.language}</h3>
             </div>
           </div>
-          {this.props.showItineraries === "There are not itineraries" ? (
+          {this.props.showItineraries === "There are not itineraries" || this.props.showItineraries.length < 1? (
             <div>
               <img
                 className="w-50"
