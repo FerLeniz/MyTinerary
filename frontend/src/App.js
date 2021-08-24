@@ -7,11 +7,6 @@ import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom";
 import City from "./pages/City";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
- import { library } from '@fortawesome/fontawesome-svg-core'
-// import { fab } from '@fortawesome/free-brands-svg-icons'
- import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
-
- library.add( faCheckSquare, faCoffee)
 
 function App() {
   return (

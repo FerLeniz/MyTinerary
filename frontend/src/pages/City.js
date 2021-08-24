@@ -22,20 +22,20 @@ class City extends React.Component {
     loading: true,
     city: {},
   };
-
+//&&this.props.showItineraries.length > 0
   componentDidMount() {
     const idCityRoute = this.props.match.params.id;
 
     this.props.getItineraries(idCityRoute);
-
+    console.log(this)
     if (
-      this.props.allCities.length > 0 &&
-      this.props.showItineraries.length > 0
+      this.props.allCities.length > 0 
     ) {
       this.setState({
         loading: false,
         city: this.props.allCities.find((city) => city._id === idCityRoute),
       });
+      console.log(' cai en el IFFF')
     } else {
       toast.error("information not found", {
         position: "top-right",
@@ -52,7 +52,7 @@ class City extends React.Component {
 
   render() {
     if (this.state.loading) {
-      return <Loader />;
+      return( <Loader />)
     }
 
     return (
@@ -85,6 +85,7 @@ class City extends React.Component {
               <h3>{this.state.city.language}</h3>
             </div>
           </div>
+          
           {this.props.showItineraries === "There are not itineraries" || this.props.showItineraries.length < 1? (
             <div>
               <img

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faClock } from "@fortawesome/free-solid-svg-icons";
+import {  faClock,faMoneyBillWave} from "@fortawesome/free-solid-svg-icons";
 import { useState} from "react";
 
 const Itineraries = (props) => {
@@ -33,7 +33,7 @@ const Itineraries = (props) => {
 
   return (
     
-      <div className="row my-5 shadow rounded ">
+      <div className="row my-5 shadow rounded">
       <div className="col-12 ">
             <h1 className="titleItinerary row rounded text-center py-1 px-1">{title}</h1>
             <div className=" col-12 d-flex flex-row ">
@@ -57,7 +57,7 @@ const Itineraries = (props) => {
           </div>
           <h4 className="d-flex justify-content-start ">"{sentence}"</h4>
           <div className="d-flex flex-row">
-            <span className="money">{"💵".repeat(price)}</span>
+          {Array(price).fill(null).map((unit,index) => unit=<FontAwesomeIcon key={index} icon={faMoneyBillWave} className="europeSvg px-1" /> )}
           </div>
           <div className="d-flex flex-row align-items-center">
             <FontAwesomeIcon icon={faClock} className="europeSvg px-1" />

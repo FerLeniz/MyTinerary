@@ -45,6 +45,7 @@ const Cities = (props) => {
       setLoading(false);
     }
     getStatusCities();
+    {console.log(props)}
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -58,6 +59,7 @@ const Cities = (props) => {
 
   return (
     <>
+    
       <ToastContainer />
       <Header />
       <div className="imgCities d-flex justify-content-end container-fluid text-center">
@@ -73,14 +75,14 @@ const Cities = (props) => {
       </div>
       <div className=" container-fluid linearBack">
         <div className="row">
-          {props.allCitiesArr.length === 0 ? (
+          {props.filteredCities.length === 0 ? (
             <div className="d-flex justify-content-center align-items-center flex-column">
               <h1>Oops! There are not results for your search</h1>
               <h2>Try another one!</h2>
               <img src={img} alt="this is error search" />
             </div>
           ) : (
-            props.allCitiesArr.map((city) => {
+            props.filteredCities.map((city) => {
               return (
                 <Link
                   data-aos="zoom-in"
@@ -113,7 +115,7 @@ const Cities = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    allCitiesArr: state.cities.allCitiesArr,
+    filteredCities: state.cities.filterCitArr,
   };
 };
 
