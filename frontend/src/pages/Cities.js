@@ -45,7 +45,6 @@ const Cities = (props) => {
       setLoading(false);
     }
     getStatusCities();
-    {console.log(props)}
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

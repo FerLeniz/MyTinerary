@@ -297,6 +297,22 @@ footer {
   display:block;
   transition-delay: 1s;
 }
+
+/*SIGN IN PAGE*/
+.formSvg {
+  font-size: 2rem;
+  color: rgba(47, 47, 107, 0.9);
+  margin-right: 0.5rem ;
+}
+
+.noOtuline{
+  outline: none !important;
+}
+
+.options{
+ width:10em!important
+}
+
 @media only screen and (max-width: 767px) {
   .photo {
     width: 50vw;

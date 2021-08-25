@@ -53,13 +53,15 @@ const itinerarisControllers = {
       .catch((err) => res.json({ success: false, response: err.message }));
   },
   deleteItinerary: (req, res) => {
-    Itinerary.findOneAndDelete({ cityId: req.params.id }).then((itinerary) => {
+    Itinerary.findOneAndDelete({ cityId: req.params.id })
+    .then((itinerary) => {
       if (itinerary) {
         res.json({ success: true });
       } else {
         throw new Error("The itinerary doesn´t exists");
       }
-    });
+    })
+    .catch((err) => res.json({ success: false, response: err.message }))
   },
 };
 
