@@ -3,15 +3,15 @@ const bcrypt = require("bcryptjs");
 
 const usersController = {
   addNewUser: (req, res) => {
-   console.log(req.body)
+   
     const { name, lastName, email, url, country,password } = req.body;
     // var salt = bcrypt.genSaltSync(10);
-    //  const hash = bcrypt.hashSync(req.body.password, 10);
+    const hash = bcrypt.hashSync(req.body.password, 10);
     const newUser = new User({
       name,
       lastName,
       email,
-      password,
+      password:hash,
       url,
       country,
     });
@@ -36,10 +36,10 @@ const usersController = {
           throw new Error("Mail and/or password are incorrect");
         }
         let value=bcrypt.compareSync(password, user.password)
-        if (value) {
-          throw new Error("Mail and/or password are incorrect");
+        if (!value) {
+          throw new Error("Mail and/or password are ");
         }
-        res.json({ success: true, response: User });
+        res.json({ success: true, response: email.email });
       })
       .catch((err) => res.json({ success: false, error: err.message }));
   },

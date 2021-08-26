@@ -12,61 +12,99 @@ import {
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import userActions from "../redux/actions/userActions";
+import { connect } from "react-redux";
 
-export default class SignUp extends React.Component {
-  state = {
-    countries: "",
-    userData: {
-      name: "",
-      lastName: "",
-      email: "",
-      password: "",
-      url: "",
-      country: "",
-    },
+class SignUp extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      countries: "",
+      userData: {
+        name: "",
+        lastName: "",
+        email: "",
+        password: "",
+        url: "",
+        country: "",
+      },
+    };
+
+    this.changeValue = this.changeValue.bind(this);
+    this.sendForm = this.sendForm.bind(this);
+    this.validateForm = this.validateForm.bind(this);
+    this.toTop = this.toTop.bind(this);
+  }
+
+  toTop = () => {
+    window.scroll({
+      top: 0,
+      left: 0,
+    });
   };
 
   componentDidMount() {
+    this.toTop();
     axios.get("https://restcountries.eu/rest/v2/all").then((res) => {
       this.setState({ countries: res.data });
     });
-    console.log(this)
   }
 
-  changeValue = (e) => {
+  changeValue(e) {
     let value = e.target.value;
-    const field = e.target.name;
+    let field = e.target.name;
     this.setState({
       ...this.state,
       userData: { ...this.state.userData, [field]: value },
     });
-  };
+  }
 
-  sendForm = (e) => {
-    e && e.preventDefault();//let state =
-  let stat=this.state.userData
-    if (
-      stat.password === "" || stat.firstname === "" || stat.country === "" || stat.email === "" || stat.url === "" || stat.lastName === ""
-    ) {
-
-       console.log(this)
-      toast.error("Please complete all fields", {
+  async sendForm(e) {
+    e && e.preventDefault();
+    let stat = this.state.userData;
+    try {
+      if (
+        stat.password === "" ||
+        stat.name === "" ||
+        stat.country === "" ||
+        stat.email === "" ||
+        stat.url === "" ||
+        stat.lastName === ""
+      ) {
+        toast.error("Please complete well fields", {
+          position: "top-right",
+          autoClose: 5000,
+        });
+      } else {
+        await this.props.postUser(this.state.userData);
+        toast.success("Welcome to adventure", {
+          onClose: () => {
+            this.props.history.push("/");
+          },
+        });
+      }
+    } catch {
+      toast.error("There´s an error", {
         position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
-    } else {
-      console.log("caiste en elseeee");
-      axios
-        .post("http://localhost:4000/api/signUpUser")
-        .then((res) => console.log(res))
-        .catch(err => console.log(err))
     }
-  };
+  }
+
+  validateForm(e) {
+    let nameField = e.target.name;
+    let value = e.target.value;
+
+    if (nameField === "email" && !value.includes("@")) {
+      toast.error("Complete well with @", {
+        position: "top-right",
+      });
+    } else if (nameField === "password" && value.length < 4) {
+      toast.error("Must be at least 4 characters long", {
+        position: "top-right",
+      });
+    }
+  }
 
   render() {
     return (
@@ -104,6 +142,7 @@ export default class SignUp extends React.Component {
               <div className="my-1">
                 <FontAwesomeIcon icon={faEnvelope} className="formSvg" />
                 <input
+                  onBlur={(e) => this.validateForm(e)}
                   onChange={this.changeValue}
                   className=" fs-4 rounded-pill shadow border border-light noOtuline"
                   type="text"
@@ -115,8 +154,9 @@ export default class SignUp extends React.Component {
               <div className="my-1">
                 <FontAwesomeIcon icon={faKey} className="formSvg" />
                 <input
+                  onBlur={(e) => this.validateForm(e)}
                   onChange={this.changeValue}
-                  type="text"
+                  type="password"
                   className=" fs-4 rounded-pill shadow border border-light noOtuline"
                   placeholder="Password"
                   name="password"
@@ -128,18 +168,18 @@ export default class SignUp extends React.Component {
                   onChange={this.changeValue}
                   className=" fs-4 rounded-pill shadow border border-light noOtuline"
                   type="text"
-                  placeholder="Repeat Password"
+                   placeholder="Repeat Password"
                   name="repeatPassword"
                 />
               </div> */}
               <div className="my-1">
                 <FontAwesomeIcon icon={faImage} className="formSvg" />
                 <input
-                 onChange={this.changeValue}
-                 type="text"
-                 className=" fs-4 rounded-pill shadow border border-light noOtuline"
-                 placeholder="Your photo"
-                 name="url"
+                  onChange={this.changeValue}
+                  type="text"
+                  className=" fs-4 rounded-pill shadow border border-light noOtuline"
+                  placeholder="Your photo"
+                  name="url"
                 />
               </div>
               <div className="my-1">
@@ -183,3 +223,18 @@ export default class SignUp extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    //filteredCities: state.cities.filterCitArr,
+    userStatus: state.user.userStatus,
+  };
+};
+
+const mapDispatchToProps = {
+  postUser: userActions.postUser,
+  // getCities: citiesActions.getAllCities,
+  // filterCities: citiesActions.filterCities,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
