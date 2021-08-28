@@ -58,7 +58,6 @@ const Cities = (props) => {
 
   return (
     <>
-    
       <ToastContainer />
       <Header />
       <div className="imgCities d-flex justify-content-end container-fluid text-center">

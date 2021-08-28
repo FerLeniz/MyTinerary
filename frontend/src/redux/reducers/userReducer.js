@@ -1,6 +1,7 @@
 const initState = {
-  userStatus: '',
-  name:null
+  token: null,
+ name:null,
+ url:null
 };
 
 const userReducer = (state = initState, action) => {
@@ -8,15 +9,27 @@ const userReducer = (state = initState, action) => {
     case "POST_USER":
       return {
         ...state,
-        userStatus: action.payload,
+        token: action.payload.token,
+        name:action.payload.name,
+        url:action.payload.url
       };
     case "LOG_USER":
-      localStorage.setItem('userLogged', JSON.stringify({ }))
-      localStorage.setItem('token', action.payload)
+      localStorage.setItem("token", action.payload.token)
+      localStorage.setItem("name",action.payload.name)
+      localStorage.setItem("url",action.payload.url)
       return {
-          ...state,
-          userStatus: action.payload
-      }
+        ...state,
+        token: action.payload.token,
+        name:action.payload.name,
+        url:action.payload.url
+      };
+    case "LOG_OUT":
+      localStorage.removeItem("token")
+      localStorage.removeItem("name")
+      localStorage.removeItem("url")
+      return {
+        token: null,
+      };
     default:
       return state;
   }

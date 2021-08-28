@@ -7,6 +7,17 @@
   width: 4rem;
 }
 
+.buttonNav{
+  width: 2.5em!important;
+  min-height: 3em;
+  z-index: 2!important;
+  background-size: cover;
+  background-position:50%;
+  background-repeat: no-repeat;
+  border-radius:150px;
+    
+}
+
 .navbar-nav > a:hover {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   border-radius: 10px 100px / 100px;

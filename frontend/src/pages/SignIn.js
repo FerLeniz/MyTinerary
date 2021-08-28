@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import userActions from "../redux/actions/userActions";
+import GoogleLogin from "react-google-login";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -69,12 +70,27 @@ class SignIn extends React.Component {
       }
     } catch (e) {
       console.log(e);
-      console.log("OH NOO cai en Catch");
       toast.error("there´s a problem", {
         position: "top-right",
       });
     }
   }
+
+  responseGoogle = async (response) => {
+    let user={
+        email:  response.profileObj.email,
+        password:  response.profileObj.googleId,
+        flagGoogle:true
+    }
+    let result = await this.props.logUser(user);
+    if (!result.data.success) {
+      console.log(result.data);
+      this.setState({
+        error: "No complete well, try again....",
+        inputError: null,
+      });
+    } 
+  };
 
   validateForm(e) {
     let nameField = e.target.name;
@@ -135,6 +151,14 @@ class SignIn extends React.Component {
                 <p className="fs-4 ">Sign In</p>
               </button>
             </div>
+            <GoogleLogin
+              className=" text-center "
+                clientId="65679480973-p575cghuvmfa66oindocsnolt53o1kcn.apps.googleusercontent.com"
+                buttonText="Sign in with Google"
+                onSuccess={this.responseGoogle}
+                onFailure={this.responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
           </div>
         </div>
         <Footer />

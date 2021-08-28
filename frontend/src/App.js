@@ -7,21 +7,44 @@ import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom";
 import City from "./pages/City";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import { connect } from "react-redux";
+import userActions from "./redux/actions/userActions";
+import React, { useEffect } from 'react'
 
-function App() {
+const App = (props) => {
+   
+   useEffect(() => {
+    if (localStorage.getItem("token")) {
+      props.anticipateLogInLS(localStorage.getItem("token"),localStorage.getItem("name"),localStorage.getItem("url"))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+ }, [])
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/cities" component={Cities} />
         <Route path="/city/:id" component={City} />
-        <Route path="/signin" component={SignIn} />
-        <Route path="/signup" component={SignUp} />
+        {!props.token && <Route path="/signin" component={SignIn} />}
+        {!props.token && <Route path="/signup" component={SignUp} />}
         <Route path="/notFound" component={notFound404} />
-        <Redirect to="/notFound" />
+        <Redirect to="/" />
       </Switch>
     </BrowserRouter>
   );
-}
+};
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    token: state.user.token,
+    url:state.user.url,
+    name:state.user.name
+  };
+};
+
+const mapDispatchToProps = {
+  anticipateLogInLS: userActions.anticipateLogInLS,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
