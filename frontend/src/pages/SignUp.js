@@ -15,8 +15,11 @@ import "react-toastify/dist/ReactToastify.css";
 import userActions from "../redux/actions/userActions";
 import { connect } from "react-redux";
 import GoogleLogin from "react-google-login";
-//65679480973-p575cghuvmfa66oindocsnolt53o1kcn.apps.googleusercontent.com
+import { Link } from "react-router-dom";
+//65679480973-p575cghuvmfa66oindocsnolt53o1kcn.apps.googleusercontent.com   --> googleID
 //t8LbZcQ285xQiufSiopJzSqb -->client secret
+
+let source = axios.CancelToken.source();
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -32,11 +35,12 @@ class SignUp extends React.Component {
         url: "",
         country: "",
       },
-      errors: { name: "", lastName: "", email: "", password: "", url: "" },
+      errorsInput: { name: "", lastName: "", email: "", password: "", url: "" },
       error: null,
       inputError: null,
     };
 
+    source = axios.CancelToken.source();
     this.changeValue = this.changeValue.bind(this);
     this.sendForm = this.sendForm.bind(this);
     //this.validateInput = this.validateForm.bind(this);
@@ -52,10 +56,20 @@ class SignUp extends React.Component {
 
   componentDidMount() {
     this.toTop();
-    axios.get("https://restcountries.eu/rest/v2/all").then((res) => {
-      this.setState({ countries: res.data });
+    axios.get("https://restcountries.eu/rest/v2/all",{cancelToken: source.token
+    }).then((res) => {
+      this.setState({
+        countries: res.data.filter((country) => country.name.length < 12),
+      });
     });
   }
+
+  componentWillUnmount(){
+    if (source) {
+      source.cancel("Landing Component got unmounted");
+    }
+  }
+
 
   changeValue(e) {
     let value = e.target.value;
@@ -66,57 +80,70 @@ class SignUp extends React.Component {
     });
   }
 
-  async sendForm(e) {
-    e && e.preventDefault();
-    let result = await this.props.postUser(this.state.userData);
-    if (result.data.success) {
-      toast.success("Welcome to adventure", {});
-    } else {console.log('Hola mica Marquez')
-      console.log(result.data);
-      this.setState({
-        error: "No complete well, try again....",
-        inputError: null,
-      });
-    }
+   sendForm(e) {
+    e.preventDefault();
+    this.props.postUser(this.state.userData)
+    .then(res =>{
+      console.log(res)
+      if (res.data.success) {
+        toast.success("Welcome to adventure", {});
+      } else {
+        toast.error("User exits! try again...", {});
+        this.setState({
+          error: "No complete well, try again....",
+          inputError: null,
+        });
+      }
+    })
+    .catch(err=>toast.error(err.message, {position: "top-right"}))
   }
 
   responseGoogle = async (response) => {
-    let newUser={
-        name: response.profileObj.givenName,
-        lastName:  response.profileObj.familyName,
-        email:  response.profileObj.email,
-        password:  response.profileObj.googleId,
-        url:  response.profileObj.imageUrl,
-        country:  "Argentina",
-        google:true
-    }
+    let newUser = {
+      name: response.profileObj.givenName,
+      lastName: response.profileObj.familyName,
+      email: response.profileObj.email,
+      password: response.profileObj.googleId,
+      url: response.profileObj.imageUrl,
+      country: "Argentina",
+      google: true,
+    };
     let result = await this.props.postUser(newUser);
     if (!result.data.success) {
-      console.log(result.data);
+      toast.error("User exits! Please log in...", {
+        position: "top-right",
+      });
       this.setState({
         error: "No complete well, try again....",
         inputError: null,
       });
-    } 
+    } else {
+      toast.success("Welcome to adventure", {
+        position: "top-right",
+      });
+    }
   };
 
-  async validateInput(e) {
-    
+  validateInput(e) {
     e.preventDefault();
     let inputName = e.target.name;
-    let result = await this.props.postUser(this.state.userData);
-    if (!result.data.success) {
-      console.log(result)
-      let val = result.data.errors.filter((x) => x.path[0] === inputName);
-      if (val[0]) {
-        console.log(val)
-        this.setState({
-          inputError: val[0].message,
-        });
+    this.props.postUser(this.state.userData)
+    .then(res=>{
+      if (!res.data.success) {
+        let value = res.data.errorsInput.filter((err) => err.path[0] === inputName);
+        if (value[0] && value[0].path[0] === inputName) {
+          this.setState({
+            inputError: value[0].message,
+            error: null,
+          });
+        } else {
+          this.setState({ inputError: null });
+        }
+      } else {
+        this.setState({ inputError: null });
       }
-    } else {
-      this.setState({ inputError: null });
-    }
+    })
+    .catch(err=>console.log(err.message))
   }
 
   render() {
@@ -124,21 +151,30 @@ class SignUp extends React.Component {
       <>
         <ToastContainer />
         <Header />
-        <div className="container  text-center">
+        <div className="container-fluid  text-center imgForm">
           <div>
             <h1>Sign up</h1>
             <h3>Join us! It's free and takes less han 30 seconds</h3>
-            <h3 className="text-danger">{this.state.inputError}</h3>
+            <h4>
+              Already have an account?{" "}
+              <Link
+                to="/signin"
+                className="text-decoration-none text-dark fw-bold"
+              >
+                Sign In here!
+              </Link>
+            </h4>
+            <h3 className="textError" >{this.state.inputError}</h3>
           </div>
           <div className="col-12">
-            <form className=" my-2 titleItinerary  rounded shadow  d-flex justify-content-center flex-column">
+            <form className=" my-2 titleItinerary  rounded  d-flex justify-content-center flex-column">
               <div className="my-1 ">
                 <FontAwesomeIcon icon={faUser} className="formSvg" />
                 <input
                   onBlur={(e) => this.validateInput(e)}
                   onChange={this.changeValue}
                   type="text"
-                  className=" fs-4 rounded-pill shadow border border-light noOtuline"
+                  className=" fs-4 rounded-pill shadow border border-light noOtuline borderInput"
                   placeholder="First Name"
                   name="name"
                 ></input>
@@ -225,16 +261,15 @@ class SignUp extends React.Component {
               >
                 <p className="fs-4 ">Sign Up</p>
               </button>
-              </div>
-              <GoogleLogin
-              className=" text-center "
-                clientId="65679480973-p575cghuvmfa66oindocsnolt53o1kcn.apps.googleusercontent.com"
-                buttonText="Create account with Google"
-                onSuccess={this.responseGoogle}
-                onFailure={this.responseGoogle}
-                cookiePolicy={"single_host_origin"}
-              />
-            
+            </div>
+            <GoogleLogin
+              className=" text-center viewMore shadow my-3"
+              clientId="65679480973-p575cghuvmfa66oindocsnolt53o1kcn.apps.googleusercontent.com"
+              buttonText="Create account with Google"
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseGoogle}
+              cookiePolicy={"single_host_origin"}
+            />
           </div>
         </div>
         <Footer />

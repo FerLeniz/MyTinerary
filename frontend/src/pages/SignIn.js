@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import userActions from "../redux/actions/userActions";
 import GoogleLogin from "react-google-login";
+import { Link } from "react-router-dom";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -52,44 +53,40 @@ class SignIn extends React.Component {
     let stat = this.state.userData;
     try {
       if (stat.password === "" || stat.email === "") {
-        toast.error("Please complete well fields", {
+        toast.error("Please complete all fields", {
           position: "top-right",
           autoClose: 5000,
         });
       } else {
         let result = await this.props.logUser(this.state.userData);
         if (result.data.success) {
-          toast.success("Welcome to adventure", {
-            // onClose: () => {
-            //   this.props.history.push("/");
-            // },
-          });
+          toast.success("Welcome to adventure", {});
         } else {
           throw new Error("Network error");
         }
       }
     } catch (e) {
       console.log(e);
-      toast.error("there´s a problem", {
+      toast.error("User doesn´t exits, try again...", {
         position: "top-right",
       });
     }
   }
 
   responseGoogle = async (response) => {
-    let user={
-        email:  response.profileObj.email,
-        password:  response.profileObj.googleId,
-        flagGoogle:true
-    }
+    let user = {
+      email: response.profileObj.email,
+      password: response.profileObj.googleId,
+      flagGoogle: true,
+    };
     let result = await this.props.logUser(user);
     if (!result.data.success) {
-      console.log(result.data);
+      console.log('entro')
       this.setState({
         error: "No complete well, try again....",
         inputError: null,
       });
-    } 
+    }
   };
 
   validateForm(e) {
@@ -112,13 +109,14 @@ class SignIn extends React.Component {
       <>
         <Header />
         <ToastContainer />
-        <div className="container  text-center">
+        <div className="container-fluid text-center imgForm">
           <div>
             <h1>Sign in</h1>
-            <h3>Enter to your account!</h3>
+            <h3>Enter to your account... or</h3>
+            <h4>Don't have an account? <Link to='/signup' className="fw-bold text-decoration-none text-dark fs-bold">Sign up here!</Link></h4>
           </div>
           <div className="col-12">
-            <form className=" my-2 titleItinerary  rounded shadow  d-flex justify-content-center flex-column">
+            <form className=" my-2 titleItinerary d-flex justify-content-center flex-column">
               <div className="my-1">
                 <FontAwesomeIcon icon={faEnvelope} className="formSvg" />
                 <input
@@ -152,13 +150,13 @@ class SignIn extends React.Component {
               </button>
             </div>
             <GoogleLogin
-              className=" text-center "
-                clientId="65679480973-p575cghuvmfa66oindocsnolt53o1kcn.apps.googleusercontent.com"
-                buttonText="Sign in with Google"
-                onSuccess={this.responseGoogle}
-                onFailure={this.responseGoogle}
-                cookiePolicy={"single_host_origin"}
-              />
+              className=" text-center viewMore my-3 shadow"
+              clientId="65679480973-p575cghuvmfa66oindocsnolt53o1kcn.apps.googleusercontent.com"
+              buttonText="Sign in with Google"
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseGoogle}
+              cookiePolicy={"single_host_origin"}
+            />
           </div>
         </div>
         <Footer />

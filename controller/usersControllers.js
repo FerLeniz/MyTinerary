@@ -34,6 +34,7 @@ const usersController = {
     User.findOne({ email: email })
       .then((user) => {
         if (!user) {
+          console.log(user)
           throw new Error("Mail and/or password are incorrect");
         }
         if(user.google && !flagGoogle){
@@ -41,7 +42,7 @@ const usersController = {
         }
         let value = bcrypt.compareSync(password, user.password);
         if (!value) {
-          throw new Error("Mail and/or password are ");
+          throw new Error("Mail and/or password are not correct");
         }
         const token = jwt.sign({ ...user }, process.env.SECRETORKEY);
         res.json({

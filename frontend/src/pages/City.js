@@ -26,16 +26,14 @@ class City extends React.Component {
   componentDidMount() {
     const idCityRoute = this.props.match.params.id;
 
-    this.props.getItineraries(idCityRoute);
-    console.log(this)
+    this.props.getItineraries(idCityRoute)
     if (
       this.props.allCities.length > 0 
     ) {
       this.setState({
         loading: false,
         city: this.props.allCities.find((city) => city._id === idCityRoute),
-      });
-      console.log(' cai en el IFFF')
+      })
     } else {
       toast.error("information not found", {
         position: "top-right",

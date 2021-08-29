@@ -288,17 +288,18 @@ footer {
 }
 
 .viewMore{
-    background-color: rgba(252, 252, 98, 0.9);
+    background-color: rgba(252, 252, 98, 0.9)!important;
     outline: none !important;
     border: none;
-    border-radius: 10px 100px / 120px;
+    border-radius: 10px 100px / 120px!important;
     box-shadow: 5px 5px 5px #41658a;
     text-shadow: 0.1rem 0.1rem #f9fbfd;
+    color:#030303!important
 }
 
-.titleItinerary{
+/* .titleItinerary{
   background: rgba(52, 29, 232, 0.25);
-}
+} */
 
 .money{
   font-size: 2rem;
@@ -321,8 +322,20 @@ footer {
 }
 
 .options{
- width:10em!important
+ width:12em!important
 }
+
+.imgForm{
+  background-image:linear-gradient(rgba(221, 221, 221, 0.5), rgba(163, 153, 153,0.5)), url('https://www.godominicanrepublic.com/wp-content/uploads/2017/11/PlayaBlanca-PhotoCredit_usatoday-com-1.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+ .textError{
+  color:red;
+} 
 
 @media only screen and (max-width: 767px) {
   .photo {
