@@ -54,10 +54,6 @@ class SignIn extends React.Component {
     let stat = this.state.userData;
     try {
       if (stat.password === "" || stat.email === "") {
-        // toast.error("Please complete all fields", {
-        //   position: "top-right",
-        //   autoClose: 5000,
-        // });
         this.setState({
           error: "Please complete all fields",
           inputError: null,
@@ -67,7 +63,6 @@ class SignIn extends React.Component {
         if (result.data.success) {
           toast.success("Welcome to adventure", {});
         } else {
-          // throw new Error("Network error");
          throw result.data.error 
         }
       }
@@ -86,6 +81,7 @@ class SignIn extends React.Component {
     };
      this.props.logUser(user)
     .then(res=>{
+      console.log('cae en then')
       if (!res.data.success) {
         toast.error("User exits! Please log in...", {
           position: "top-right",

@@ -54,7 +54,6 @@ const usersController = {
       .catch((err) => res.json({ success: false, error: err.message }));
   },
   verifyToken:(req,res)=>{
-    console.log(req)
    return res.json({ name: req.user.name, url: req.user.url })
   }
 };

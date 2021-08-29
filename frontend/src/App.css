@@ -337,6 +337,10 @@ footer {
   color:red;
 } 
 
+.alternativeText{
+  display:none;
+}
+
 @media only screen and (max-width: 767px) {
   .photo {
     width: 50vw;
@@ -372,4 +376,14 @@ footer {
   .divToDisplay{
     text-align: center!important;
   }
+
+  .textNav{
+    display: none;
+    }
+
+    .alternativeText{
+      display:block
+    }
 }
+
+

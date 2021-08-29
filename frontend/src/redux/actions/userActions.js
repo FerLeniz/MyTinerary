@@ -26,10 +26,10 @@ const userActions = {
   },
   logOut: () => {
     return (dispatch) => {
-      dispatch({ type: "LOG_OUT" });
+      return dispatch({ type: "LOG_OUT" });
     };
   },
-  anticipateLogInLS: (token, name, url) => {
+  anticipateLogInLS: (token) => {
     return async (dispatch) => {
       try {
         let res = await axios.get("http://localhost:4000/api/verifyToken", {
@@ -40,7 +40,7 @@ const userActions = {
           payload: { token, name: res.data.name, url: res.data.url },
         });
       } catch (e) {
-       dispatch({ type: "LOG_OUT" });
+       return dispatch({ type: "LOG_OUT" });
       }
     };
   },

@@ -10,10 +10,10 @@ import userActions from "../redux/actions/userActions";
 
 const Header = (props) => {
   const sesionOut = () => {
-    props.logOutUser();
     toast.success("See you later!", {
       position: "top-right",
     });
+    props.logOutUser();
   };
 
   return (
@@ -22,19 +22,25 @@ const Header = (props) => {
       <Navbar bg="light" expand="md">
         <img className="imgNav" src={logo} alt="logo" />
         {/* <Image src={logo} thumbnail /> */}
-        <Navbar.Brand className="textLogo fw-bolder animate__animated animate__rubberBand">
+        <Navbar.Brand className="textLogo fw-bolder animate__animated animate__rubberBand textNav">
           MyTinerary
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" className="me-3" />
-        <Navbar.Collapse
-          id="basic-navbar-nav "
-          className="d-lg-flex justify-content-end text-center"
-        >
-          <Nav className="ml-auto d-flex align-items-center ">
-            <h6 className="mx-2 mt-2">
+        <h6 className="mx-2 mt-2 alternativeText">
               {props.userStatus ? `Welcome ${props.name}` : null}
             </h6>
-            <NavDropdown
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          className="me-3"
+        />
+        <Navbar.Collapse
+          id="basic-navbar-nav "
+          className="d-lg-flex justify-content-end text-center  "
+        >
+          <Nav className="ml-auto d-flex align-items-center ">
+            <h6 className="mx-2 mt-2 textNav">
+              {props.userStatus ? `Welcome ${props.name}` : null}
+            </h6>
+            <span
               className="buttonNav"
               style={{
                 backgroundImage: `url(${
@@ -43,8 +49,8 @@ const Header = (props) => {
                     : "https://t4.ftcdn.net/jpg/01/18/03/35/160_F_118033506_uMrhnrjBWBxVE9sYGTgBht8S5liVnIeY.jpg"
                 })`,
               }}
-              id="basic-nav-dropdown"
-            >
+            ></span>
+            <NavDropdown id="basic-nav-dropdown">
               <div className="  d-flex flex-column align-items-center justify-content-center">
                 {props.userStatus ? (
                   <div>
@@ -58,18 +64,22 @@ const Header = (props) => {
                   </div>
                 ) : (
                   <div className="d-flex flex-column align-items-center justify-content-center">
-                    {!props.userStatus && <NavLink
-                      to="/signin"
-                      className="text-decoration-none text-dark"
-                    >
-                      Sign in
-                    </NavLink>}
-                    {!props.userStatus && <NavLink
-                      to="/signup"
-                      className="text-decoration-none text-dark"
-                    >
-                      Sign up
-                    </NavLink>}
+                    {!props.userStatus && (
+                      <NavLink
+                        to="/signin"
+                        className="text-decoration-none text-dark"
+                      >
+                        Sign in
+                      </NavLink>
+                    )}
+                    {!props.userStatus && (
+                      <NavLink
+                        to="/signup"
+                        className="text-decoration-none text-dark"
+                      >
+                        Sign up
+                      </NavLink>
+                    )}
                   </div>
                 )}
               </div>
@@ -96,8 +106,8 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
   return {
     userStatus: state.user.token,
-    name:state.user.name,
-    url:state.user.url
+    name: state.user.name,
+    url: state.user.url,
   };
 };
 

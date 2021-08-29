@@ -34,7 +34,7 @@ export default class Home extends React.Component {
         id: 3,
         name: "Fanjingshan",
         url:
-          "https://s.yimg.com/uu/api/res/1.2/VST036KhGikkkHkqSOcrDw--~B/aD0xOTI0O3c9Mjg4NztzbT0xO2FwcGlkPXl0YWNoeW9u/http://media.zenfs.com/en_US/News/US-AFPRelax/04_fanjingshan_.93ef7155937.original.jpg",
+          "https://www.travelbook.de/data/uploads/2021/01/219733358_1610121494.jpg",
       },
       {
         id: 4,
