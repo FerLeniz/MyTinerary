@@ -29,6 +29,8 @@ const userReducer = (state = initState, action) => {
       localStorage.removeItem("url")
       return {
         token: null,
+        name:null,
+        url:null
       };
     default:
       return state;

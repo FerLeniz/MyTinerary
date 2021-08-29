@@ -35,7 +35,7 @@ class SignUp extends React.Component {
         url: "",
         country: "",
       },
-      errorsInput: { name: "", lastName: "", email: "", password: "", url: "" },
+      errors: { name: "", lastName: "", email: "", password: "", url: "" },
       error: null,
       inputError: null,
     };
@@ -65,6 +65,7 @@ class SignUp extends React.Component {
   }
 
   componentWillUnmount(){
+    this.toTop();
     if (source) {
       source.cancel("Landing Component got unmounted");
     }
@@ -88,7 +89,6 @@ class SignUp extends React.Component {
       if (res.data.success) {
         toast.success("Welcome to adventure", {});
       } else {
-        toast.error("User exits! try again...", {});
         this.setState({
           error: "No complete well, try again....",
           inputError: null,
@@ -130,7 +130,7 @@ class SignUp extends React.Component {
     this.props.postUser(this.state.userData)
     .then(res=>{
       if (!res.data.success) {
-        let value = res.data.errorsInput.filter((err) => err.path[0] === inputName);
+        let value = res.data.errors.filter((err) => err.path[0] === inputName);
         if (value[0] && value[0].path[0] === inputName) {
           this.setState({
             inputError: value[0].message,
@@ -253,7 +253,7 @@ class SignUp extends React.Component {
               </div>
               <div></div>
             </form>
-            <h6 className="text-danger">{this.state.error}</h6>
+            <h5 className="textError">{this.state.error}</h5>
             <div className="">
               <button
                 className="my-2 py-1 px-3 viewMore"

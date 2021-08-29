@@ -30,8 +30,18 @@ const userActions = {
     };
   },
   anticipateLogInLS: (token, name, url) => {
-    return (dispatch) => {
-      dispatch({ type: "LOG_USER", payload: { token, name, url } });
+    return async (dispatch) => {
+      try {
+        let res = await axios.get("http://localhost:4000/api/verifyToken", {
+          headers: { Authorization: "Bearer " + token },
+        });
+        dispatch({
+          type: "LOG_USER",
+          payload: { token, name: res.data.name, url: res.data.url },
+        });
+      } catch (e) {
+       dispatch({ type: "LOG_OUT" });
+      }
     };
   },
 };

@@ -15,7 +15,8 @@ const App = (props) => {
    
    useEffect(() => {
     if (localStorage.getItem("token")) {
-      props.anticipateLogInLS(localStorage.getItem("token"),localStorage.getItem("name"),localStorage.getItem("url"))
+      //props.anticipateLogInLS(localStorage.getItem("token"),localStorage.getItem("name"),localStorage.getItem("url"))
+      props.anticipateLogInLS(localStorage.getItem("token"))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [])

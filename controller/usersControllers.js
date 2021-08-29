@@ -38,7 +38,7 @@ const usersController = {
           throw new Error("Mail and/or password are incorrect");
         }
         if(user.google && !flagGoogle){
-          throw new Error("You  created an account with Google,please log in with them");
+          throw new Error("You  have a Google´s account,please log in there");
         }
         let value = bcrypt.compareSync(password, user.password);
         if (!value) {
@@ -53,6 +53,10 @@ const usersController = {
       })
       .catch((err) => res.json({ success: false, error: err.message }));
   },
+  verifyToken:(req,res)=>{
+    console.log(req)
+   return res.json({ name: req.user.name, url: req.user.url })
+  }
 };
 
 module.exports = usersController;

@@ -20,7 +20,6 @@ const validator = (req, res, next) => {
     password: joi.string().trim().required().min(9).max(20).messages({
       "string.empty": "Empty password, try again",
       "string.min": "try a longer one",
-      // country: joi.string().required(),
     }),
   });
 
@@ -28,14 +27,9 @@ const validator = (req, res, next) => {
   if (!validation.error) {
     next();
   } else {
-    console.log(validation.error.details);
     res.json({ success: false, errors: validation.error.details });
   }
   //next();
 };
 
 module.exports = validator;
-
-// .pattern(new RegExp("([^\\s]+(\\.(?i)(jpe?g|png|gif|bmp))$)")).messages({
-//    "string.pattern.base": "The format is incorrect",
-//  })

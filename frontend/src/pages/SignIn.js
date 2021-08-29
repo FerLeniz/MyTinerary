@@ -18,6 +18,7 @@ class SignIn extends React.Component {
       userData: {
         email: "",
         password: "",
+        error: null,
       },
     };
 
@@ -53,40 +54,55 @@ class SignIn extends React.Component {
     let stat = this.state.userData;
     try {
       if (stat.password === "" || stat.email === "") {
-        toast.error("Please complete all fields", {
-          position: "top-right",
-          autoClose: 5000,
+        // toast.error("Please complete all fields", {
+        //   position: "top-right",
+        //   autoClose: 5000,
+        // });
+        this.setState({
+          error: "Please complete all fields",
+          inputError: null,
         });
       } else {
         let result = await this.props.logUser(this.state.userData);
         if (result.data.success) {
           toast.success("Welcome to adventure", {});
         } else {
-          throw new Error("Network error");
+          // throw new Error("Network error");
+         throw result.data.error 
         }
       }
     } catch (e) {
-      console.log(e);
-      toast.error("User doesn´t exits, try again...", {
+      toast.error(e, {
         position: "top-right",
       });
     }
   }
 
-  responseGoogle = async (response) => {
+  responseGoogle =  (response) => {
     let user = {
       email: response.profileObj.email,
       password: response.profileObj.googleId,
       flagGoogle: true,
     };
-    let result = await this.props.logUser(user);
-    if (!result.data.success) {
-      console.log('entro')
-      this.setState({
-        error: "No complete well, try again....",
-        inputError: null,
-      });
-    }
+     this.props.logUser(user)
+    .then(res=>{
+      if (!res.data.success) {
+        toast.error("User exits! Please log in...", {
+          position: "top-right",
+        });
+        this.setState({
+          error: "No complete well, try again....",
+          inputError: null,
+        });
+      } else {
+        toast.success("Welcome to adventure", {
+          position: "top-right",
+        });
+      }
+    })
+    .catch(err=>{
+      console.log(err.message)
+    } );
   };
 
   validateForm(e) {
@@ -94,12 +110,16 @@ class SignIn extends React.Component {
     let value = e.target.value;
 
     if (nameField === "email" && !value.includes("@")) {
-      toast.error("Complete well with @", {
-        position: "top-right",
+      this.setState({
+        error: "Complete well with @",
       });
     } else if (nameField === "password" && value.length < 4) {
-      toast.error("Must be at least 4 characters long", {
-        position: "top-right",
+      this.setState({
+        error: "Must be at least 4 characters long",
+      });
+    }else{
+      this.setState({
+        error:null,
       });
     }
   }
@@ -113,7 +133,15 @@ class SignIn extends React.Component {
           <div>
             <h1>Sign in</h1>
             <h3>Enter to your account... or</h3>
-            <h4>Don't have an account? <Link to='/signup' className="fw-bold text-decoration-none text-dark fs-bold">Sign up here!</Link></h4>
+            <h4>
+              Don't have an account?{" "}
+              <Link
+                to="/signup"
+                className="fw-bold text-decoration-none text-dark fs-bold"
+              >
+                Sign up here!
+              </Link>
+            </h4>
           </div>
           <div className="col-12">
             <form className=" my-2 titleItinerary d-flex justify-content-center flex-column">
@@ -141,6 +169,7 @@ class SignIn extends React.Component {
                 />
               </div>
             </form>
+            <h5 className="textError">{this.state.error}</h5>
             <div>
               <button
                 className="my-2 py-1 px-3  viewMore"
