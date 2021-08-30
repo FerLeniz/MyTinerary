@@ -34,7 +34,6 @@ const usersController = {
     User.findOne({ email: email })
       .then((user) => {
         if (!user) {
-          console.log(user)
           throw new Error("Mail and/or password are incorrect");
         }
         if(user.google && !flagGoogle){

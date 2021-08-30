@@ -6,6 +6,7 @@ const usersController = require("../controller/usersControllers");
 const validator = require("../controller/validator");
 const passport = require('passport')
 
+// CITIES
 router
   .route("/dataCities")
   .get(citiesController.getAllCities)
@@ -17,6 +18,8 @@ router
   .delete(citiesController.deleteCity)
   .put(citiesController.modifyCity);
 
+
+//  ITINERARIES 
 router
   .route("/itineraries")
   .get(itinerariesController.getAllItineraries)
@@ -32,6 +35,7 @@ router
   .route("/itineraries/:cityId")
   .get(itinerariesController.getSpecificItineraries);
 
+// USERS  
 router.route("/signUpUser").post(validator, usersController.addNewUser);
 
 router.route("/logInUser").post(usersController.logUser);
