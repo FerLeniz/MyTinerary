@@ -85,7 +85,6 @@ class SignUp extends React.Component {
     e.preventDefault();
     this.props.postUser(this.state.userData)
     .then(res =>{
-      console.log(res)
       if (res.data.success) {
         toast.success("Welcome to adventure", {});
       } else {
