@@ -81,7 +81,6 @@ class SignIn extends React.Component {
     };
      this.props.logUser(user)
     .then(res=>{
-      console.log('cae en then')
       if (!res.data.success) {
         toast.error("User exits! Please log in...", {
           position: "top-right",

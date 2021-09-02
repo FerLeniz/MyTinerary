@@ -36,8 +36,7 @@ class SignUp extends React.Component {
         country: "",
       },
       errors: { name: "", lastName: "", email: "", password: "", url: "" },
-      error: null,
-      inputError: null,
+      inputError: 'No errors',
     };
 
     source = axios.CancelToken.source();
@@ -89,8 +88,7 @@ class SignUp extends React.Component {
         toast.success("Welcome to adventure", {});
       } else {
         this.setState({
-          error: "No complete well, try again....",
-          inputError: null,
+          inputError: 'Some inputs went wrong',
         });
       }
     })
@@ -109,11 +107,12 @@ class SignUp extends React.Component {
     };
     let result = await this.props.postUser(newUser);
     if (!result.data.success) {
+      console.log(result)
       toast.error("User exits! Please log in...", {
         position: "top-right",
       });
       this.setState({
-        error: "No complete well, try again....",
+        error: "Complete again,please",
         inputError: null,
       });
     } else {
@@ -136,10 +135,10 @@ class SignUp extends React.Component {
             error: null,
           });
         } else {
-          this.setState({ inputError: null });
+          this.setState({ inputError: "No errors" });
         }
       } else {
-        this.setState({ inputError: null });
+        this.setState({ inputError: "No errors" });
       }
     })
     .catch(err=>console.log(err.message))
@@ -252,7 +251,6 @@ class SignUp extends React.Component {
               </div>
               <div></div>
             </form>
-            <h5 className="textError">{this.state.error}</h5>
             <div className="">
               <button
                 className="my-2 py-1 px-3 viewMore"

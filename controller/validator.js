@@ -17,7 +17,7 @@ const validator = (req, res, next) => {
       .message({
         "string.pattern.base": "The format is incorrect!",
       }),
-    password: joi.string().trim().required().min(9).max(20).messages({
+    password: joi.string().trim().required().min(6).max(250).messages({
       "string.empty": "Empty password, try again",
       "string.min": "try a longer one",
     }),

@@ -282,10 +282,7 @@ footer {
   border-radius: 50%;
 }
 
-.svgHeart{
-  width: 4%;
-  color:red!important
-}
+
 
 .viewMore{
     background-color: rgba(252, 252, 98, 0.9)!important;
@@ -339,6 +336,55 @@ footer {
 
 .alternativeText{
   display:none;
+}
+
+/* ACTIVITIES */
+.photoActivity{
+  width:40vw;
+  height:80vh;
+  background-repeat:no-repeat;
+  background-size: cover;
+  background-position:50%
+}
+
+.personActivity{
+  max-width:5.5vw;
+  min-height:3vh;
+  
+}
+
+.divComments{
+  height: 70vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+.comment{
+  background-color: rgba(52, 29, 232, 0.25)
+}
+
+.inputComments{
+  outline: none;
+  font-size: 1.3rem;
+  border-radius:0.8rem;
+  border: 0.15rem solid  rgba(52, 29, 232, 0.8);
+}
+
+.glyphicon::before {
+  color: white;
+}
+
+.svgHeart{
+  color:red!important;
+  width: 4%;
+}
+
+.heartIcon{
+  color:red!important;
+  font-size: 2em!important;
+}
+
+.cursor{
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 767px) {
