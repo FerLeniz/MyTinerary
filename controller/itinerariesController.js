@@ -152,6 +152,7 @@ const itinerariesControllers = {
   deleteComment: async (req, res) => {
     const idItinerar = req.params.id;
     const { id } = req.body;
+    console.log(req.body)
     try {
       const borrarComentario = await Itinerary.findOneAndUpdate(
         { _id: idItinerar },

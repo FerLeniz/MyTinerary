@@ -35,7 +35,7 @@ const Comments = (props) => {
     const withoutSpaces = comment.message.charAt(0);
     if (props.userStatus) {
       if (withoutSpaces === " " || comment.message === "") {
-        toast.error("You must be logged in to comment", {
+        toast.error("write some text", {
           toastId: "sendComment",
         });
       } else {

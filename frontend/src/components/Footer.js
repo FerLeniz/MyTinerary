@@ -20,12 +20,12 @@ const Footer = () => {
                 Cities
               </li>
             </Link>
-            <Link to="/notFound" className="text-decoration-none text-white">
+            <Link to="/signin" className="text-decoration-none text-white">
               <li className="list-unstyled fs-5 text-decoration-none text-white">
                 Sign in
               </li>
             </Link>
-            <Link to="/notFound" className="text-decoration-none text-white">
+            <Link to="/signup" className="text-decoration-none text-white">
               <li className="list-unstyled fs-5 text-decoration-none text-white">
                 Sign up
               </li>

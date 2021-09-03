@@ -60,6 +60,7 @@ const itineraryActions = {
             id,
           { data: { id: idComment } }
         );
+        console.log(response)
         return response.data.response;
       } catch (error) {
         console.log(error);
