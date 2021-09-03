@@ -40,8 +40,8 @@ router.route("/itinerary/like/:id").post(itinerariesController.likeStatus);
 router
   .route("/itinerary/comment/:id")
   .post(passport.authenticate("jwt", { session: false }), itinerariesController.addComment)
-  .delete(itinerariesController.deleteComment)
-  .put(itinerariesController.editComment)
+   .delete(itinerariesController.deleteComment)
+   .put(itinerariesController.editComment);
 
 // USERS
 router.route("/signUpUser").post(validator, usersController.addNewUser);

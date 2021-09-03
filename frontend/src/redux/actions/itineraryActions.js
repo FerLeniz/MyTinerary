@@ -34,7 +34,7 @@ const itineraryActions = {
       }
     };
   },
-  addComments: (comment, id) => {
+  addComment: (comment, id) => {
     return async (dispatch, getState) => {
       try {
         const response = await axios.post(
@@ -52,7 +52,7 @@ const itineraryActions = {
       }
     };
   },
-  borrarComentario: (idComment, id) => {
+  deleteComment: (idComment, id) => {
     return async (dispatch, getState) => {
       try {
         const response = await axios.delete(
@@ -66,7 +66,7 @@ const itineraryActions = {
       }
     };
   },
-  editarComentario: (id, idComment, comment) => {
+  editComment: (id, idComment, comment) => {
     const dataComment = {
       idComment: idComment,
       comment: comment,

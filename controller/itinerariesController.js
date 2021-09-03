@@ -22,6 +22,13 @@ const itinerariesControllers = {
   getSpecificItineraries: (req, res) => {
     Itinerary.find({ cityId: req.params.cityId })
       .populate("cityId")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "userId",
+          select: { name: 1, lastName: 1, email: 1, url: 1 },
+        },
+      })
       .then((itinerary) => {
         if (itinerary.length > 0) {
           res.json({ success: true, response: itinerary });
@@ -116,61 +123,74 @@ const itinerariesControllers = {
         });
       }
     } catch (error) {
-      return res.json({ success: false, response: error.message })
+      return res.json({ success: false, response: error.message });
     }
   },
   addComment: async (req, res) => {
-
-    const idItinerar = req.params.id
-    const idUser = req.user._id
-    const { message } = req.body
+    const idItinerar = req.params.id;
+    const idUser = req.user._id;
+    const { message } = req.body;
 
     try {
-        const newComment = await Itinerary.findOneAndUpdate(
-            { _id: idItinerar },
-            { $push: { comments: { userId: idUser, comment: message } } },
-            { new: true }).populate({ path: "comments", populate: { path: "userId", select: { "firstName": 1, "lastName": 1, "email": 1, "userPic": 1 } } })
-
-        newComment.save()
-        res.json({ success: true, response: newComment.comments })
+      const newComment = await Itinerary.findOneAndUpdate(
+        { _id: idItinerar },
+        { $push: { comments: { userId: idUser, comment: message } } },
+        { new: true }
+      ).populate({
+        path: "comments",
+        populate: {
+          path: "userId",
+          select: { name: 1, lastName: 1, email: 1, url: 1 },
+        },
+      });
+      newComment.save();
+      res.json({ success: true, response: newComment.comments });
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-},
-deleteComment: async (req, res) => {
-  const idItinerar = req.params.id
-  const { id } = req.body
-  try {
+  },
+  deleteComment: async (req, res) => {
+    const idItinerar = req.params.id;
+    const { id } = req.body;
+    try {
       const borrarComentario = await Itinerary.findOneAndUpdate(
-          { _id: idItinerar },
-          { $pull: { comments: { _id: id } } },
-          { new: true }).populate({ path: "comments", populate: { path: "userId", select: { "firstName": 1, "lastName": 1, "email": 1, "userPic": 1 } } })
-      borrarComentario.save()
-      res.json({ success: true, response: borrarComentario.comments })
-
-  } catch (error) {
-
-      console.log(error)
-  }
-
-},
-editComment: async (req, res) => {
-  const idItinerar = req.params.id
-  const { idComentario, comment } = req.body
-  try {
+        { _id: idItinerar },
+        { $pull: { comments: { _id: id } } },
+        { new: true }
+      ).populate({
+        path: "comments",
+        populate: {
+          path: "userId",
+          select: { name: 1, lastName: 1, email: 1, url: 1 },
+        },
+      });
+      borrarComentario.save();
+      res.json({ success: true, response: borrarComentario.comments });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  editComment: async (req, res) => {
+    const idItinerar = req.params.id;
+    const { idComment, comment } = req.body;
+    try {
       const editarComentario = await Itinerary.findOneAndUpdate(
-          { _id: idItinerar, "comments._id": idComentario },
-          { $set: { "comments.$.comment": comment } },
-          { new: true }
-      ).populate({ path: "comments", populate: { path: "userId", select: { "firstName": 1, "lastName": 1, "email": 1, "userPic": 1 } } })
-      editarComentario.save()
-      res.json({ success: true, response: editarComentario.comments })
-
-  } catch (error) {
-      console.log(error)
-  }
-},
-
+        { _id: idItinerar, "comments._id": idComment },
+        { $set: { "comments.$.comment": comment } },
+        { new: true }
+      ).populate({
+        path: "comments",
+        populate: {
+          path: "userId",
+          select: { name: 1, lastName: 1, email: 1, url: 1 },
+        },
+      });
+      editarComentario.save();
+      res.json({ success: true, response: editarComentario.comments });
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 module.exports = itinerariesControllers;

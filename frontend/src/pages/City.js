@@ -35,7 +35,6 @@ class City extends React.Component {
         city: this.props.allCities.find((city) => city._id === idCityRoute),
       })
     } else {
-      console.log(this.props.allCities)
       toast.error("information not found", {
         position: "top-right",
       });

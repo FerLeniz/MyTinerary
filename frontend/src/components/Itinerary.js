@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faClock,
   faMoneyBillWave,
-  faReply,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
@@ -10,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "react-bootstrap/Carousel";
 import itineraryActions from "../redux/actions/itineraryActions";
 import { ToastContainer, toast } from "react-toastify";
+import Comments from "./Comments"
 
 const Itineraries = (props) => {
   const {
@@ -25,6 +25,7 @@ const Itineraries = (props) => {
       title,
       _id,
       userLiked,
+      comments
     },
   } = props;
 
@@ -37,6 +38,7 @@ const Itineraries = (props) => {
   const [likesCant, setLikesCant] = useState(likes);
   const [usersLikes, setUsersLikes] = useState(userLiked);
   const [actualLike, setActualLike] = useState(false);
+  //const [actualComments, setActualComments] = useState(comments)
 
   const response = async () => {
     let respAxios = await props.getActivities(_id);
@@ -53,7 +55,6 @@ const Itineraries = (props) => {
       setUsersLikes(response.usersLikes);
       setActualLike(response.btnStatus);
       setLoadingHeart(true);
-      console.log(actualLike);
     }
   };
 
@@ -68,15 +69,13 @@ const Itineraries = (props) => {
   };
 
   useEffect(() => {
-    if (props.name) {
+    if (props.name && props.userStatus) {
       if (usersLikes.includes(props.name)) {
         setActualLike(true);
       } else {
         setActualLike(false);
       }
     } else {
-      console.log(props.name);
-      console.log(actualLike);
       setActualLike(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -166,26 +165,7 @@ const Itineraries = (props) => {
               </Carousel>
             </div>
             <div className="col-sm-12 col-md-6">
-              <div className="divComments">
-                
-                {/* <div className=" my-3 shadow">
-                  <div className="d-flex flex-row align-items-center">
-                    <img
-                      className="personActivity"
-                      alt="person"
-                      src="https://th.bing.com/th/id/R.480b9fbb6640d39c818ab51e94101957?rik=Jy%2bJ8i4DRUDVIg&riu=http%3a%2f%2fwww.vignette3.wikia.nocookie.net%2fsimpsons%2fimages%2f5%2f54%2fImagemoe3.jpg%2frevision%2flatest%2fscale-to-width-down%2f185%3fcb%3d20130623173027&ehk=iVNioWslLDaAVS8QoO3kJ2WHiojIBik6DTplntWnz5A%3d&risl=&pid=ImgRaw&r=0"
-                    />
-                    <p>Moe Siklack</p>
-                  </div>
-                  <div className="d-flex justify-content-center align-items-center my-2 comment bg-gradient rounded-pill">
-                    <p>Este es mi gran comentario y me parecio fantastico</p>
-                  </div>
-                </div> */}
-              </div>
-              <div className="my-2 d-flex align-items-center justify-content-center ">
-                <input className="inputComments" type="text" />
-                <FontAwesomeIcon icon={faReply} className="europeSvg px-1" />
-              </div>
+               <Comments  comments={comments} idItinerary={_id}/>
             </div>
           </div>
         </div>
