@@ -19,7 +19,7 @@ const Comments = (props) => {
   
 
   useEffect(() => {
-       setAllComments(comments)
+       //setAllComments(comments)
        // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [])
 

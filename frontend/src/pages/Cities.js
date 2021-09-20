@@ -19,8 +19,8 @@ const Cities = (props) => {
     window.scroll({
       top: 0,
       left: 0,
-    });
-  };
+    })
+  }
 
   const [loading, setLoading] = useState(true);
 

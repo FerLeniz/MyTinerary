@@ -3,9 +3,16 @@ import axios from "axios";
 const itineraryActions = {
   getItineraries: (id) => {
     return (dispatch) => {
-      axios.get("http://localhost:4000/api/itineraries/" + id).then((res) => {
-        dispatch({ type: "GET_ITINERARIES", payload: res.data.response });
-      });
+      axios.get("http://localhost:4000/api/itineraries/" + id)
+      .then((res) => {
+        if(res.data.success){
+          dispatch({ type: "GET_ITINERARIES", payload: res.data.response, success:res.data.response });
+        }else{
+          dispatch({ type: "GET_ITINERARIES", success: res.data.response });
+        }
+        
+      })
+      .catch(error => console.log(error))
     };
   },
   getActivities: (id) => {
@@ -23,14 +30,11 @@ const itineraryActions = {
   viewLikes: (id, name) => {
     return async (dispatch) => {
       try {
-        const resp = await axios.post(
-          "http://localhost:4000/api/itinerary/like/" + id,
-          { data: { email: name } }
-        );
-        console.log(id);
+        const resp = await axios.post("http://localhost:4000/api/itinerary/like/" + id,
+          { data: { email: name } })
         return resp.data.response;
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     };
   },
@@ -60,7 +64,6 @@ const itineraryActions = {
             id,
           { data: { id: idComment } }
         );
-        console.log(response)
         return response.data.response;
       } catch (error) {
         console.log(error);

@@ -36,6 +36,11 @@ router
   .get(itinerariesController.getSpecificItineraries);
 
 router.route("/itinerary/like/:id").post(itinerariesController.likeStatus);
+// router.route('/itinerary/like/:id')
+//     .put(itinerariesController.putLike)
+
+// router.route('/itinerary/deleteLike/:id')
+//     .put(itinerariesController.deleteLike)
 
 router
   .route("/itinerary/comment/:id")

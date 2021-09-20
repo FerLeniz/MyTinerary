@@ -40,6 +40,7 @@ const Comment = (props) => {
 
   return (
     <div className=" my-3 shadow" key={comment._id}>
+
       <div className="d-flex flex-row align-items-center">
         <img className="personActivity" alt="person" src={comment.userId.url} />
         <p className="px-3">{comment.userId.name}</p>
@@ -74,7 +75,7 @@ const Comment = (props) => {
               value={commentContent}
             />
             <i
-              className="far fa-paper-plane"
+              className="far fa-paper-plane  mx-2 fs-3"
               onClick={() => {
                 modifyComment(commentContent, comment._id);
                 setUpdateComment(!updateComment);
@@ -82,7 +83,6 @@ const Comment = (props) => {
             ></i>
           </div>
         )}
-
       </div>
     </div>
   );

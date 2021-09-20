@@ -23,30 +23,35 @@ class City extends React.Component {
     city: {},
   };
 //&&this.props.showItineraries.length > 0
+
   componentDidMount() {
     const idCityRoute = this.props.match.params.id;
 
-    this.props.getItineraries(idCityRoute)
-    if (
-      this.props.allCities.length > 0 
-    ) {
+    if (this.props.allCities.length > 0 ) {
       this.setState({
         loading: false,
         city: this.props.allCities.find((city) => city._id === idCityRoute),
       })
-    } else {
+    } 
+    else {
       toast.error("information not found", {
         position: "top-right",
       });
       this.props.history.push("/cities");
     }
+    this.props.getItineraries(idCityRoute)
+  }
+
+  componentWillUnmount(){
+    const idCityRoute = this.props.match.params.id;
+    this.props.getItineraries(idCityRoute)
   }
 
   render() {
     if (this.state.loading) {
       return( <Loader />)
     }
-
+    
     return (
       <>
         <ToastContainer />
@@ -91,8 +96,9 @@ class City extends React.Component {
               <h3>Please, feel free to post the first one!</h3>
             </div>
           ) : (
+            
             this.props.showItineraries.map((itinerary) => (
-              <Itinerary key={itinerary._id} itinerary={itinerary} />
+              <Itinerary key={itinerary._id} itinerary={itinerary}  />
             ))
           )}
         </div>

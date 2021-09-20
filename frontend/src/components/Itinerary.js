@@ -1,14 +1,11 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faClock,
-  faMoneyBillWave,
-} from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Carousel from "react-bootstrap/Carousel";
-import itineraryActions from "../redux/actions/itineraryActions";
-import { ToastContainer, toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faClock, faMoneyBillWave } from "@fortawesome/free-solid-svg-icons"
+import { useState, useEffect } from "react"
+import { connect } from "react-redux"
+import "bootstrap/dist/css/bootstrap.min.css"
+import Carousel from "react-bootstrap/Carousel"
+import itineraryActions from "../redux/actions/itineraryActions"
+import { ToastContainer, toast } from "react-toastify"
 import Comments from "./Comments"
 
 const Itineraries = (props) => {
@@ -25,61 +22,61 @@ const Itineraries = (props) => {
       title,
       _id,
       userLiked,
-      comments
+      comments,
     },
-  } = props;
+  } = props
 
   const [button, setButton] = useState({
     class: "d-none",
     textContent: "View More",
-  });
-  const [loadingHeart, setLoadingHeart] = useState(true);
-  const [activities, setActivities] = useState([]);
-  const [likesCant, setLikesCant] = useState(likes);
-  const [usersLikes, setUsersLikes] = useState(userLiked);
-  const [actualLike, setActualLike] = useState(false);
+  })
+  const [loadingHeart, setLoadingHeart] = useState(true)
+  const [activities, setActivities] = useState([])
+  const [likesCant, setLikesCant] = useState(likes)
+  const [usersLikes, setUsersLikes] = useState(userLiked)
+  const [actualLike, setActualLike] = useState(false)
   //const [actualComments, setActualComments] = useState(comments)
 
   const response = async () => {
-    let respAxios = await props.getActivities(_id);
-    setActivities(respAxios);
-  };
+    let respAxios = await props.getActivities(_id)
+    setActivities(respAxios)
+  }
 
   const likeStatus = async () => {
     if (!props.userStatus) {
-      toast.error("Please, log in to like this.");
+      toast.error("Please, log in to like this.")
     } else {
-      setLoadingHeart(false);
-      const response = await props.viewLikes(_id, props.name);
-      setLikesCant(response.likes);
-      setUsersLikes(response.usersLikes);
-      setActualLike(response.btnStatus);
-      setLoadingHeart(true);
+      setLoadingHeart(false)
+      const response = await props.viewLikes(_id, props.name)
+      setLikesCant(response.likes)
+      setUsersLikes(response.usersLikes)
+      setActualLike(response.btnStatus)
+      setLoadingHeart(true)
     }
-  };
+  }
 
   const changeStatus = (e) => {
-    let text = e.target.textContent;
-    response();
+    let text = e.target.textContent
+    response()
     setButton(
       text === "View More"
         ? { textContent: "View Less", class: "transitions" }
         : { textContent: "View More", class: "d-none" }
-    );
-  };
+    )
+  }
 
   useEffect(() => {
     if (props.name && props.userStatus) {
       if (usersLikes.includes(props.name)) {
-        setActualLike(true);
-      } else {
-        setActualLike(false);
+        setActualLike(true)
+      }else{
+        setActualLike(false)
       }
     } else {
-      setActualLike(false);
+      setActualLike(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.userStatus]);
+  }, [props.userStatus,props.name])
 
   return (
     <div className="row my-5 shadow rounded">
@@ -136,6 +133,7 @@ const Itineraries = (props) => {
             )}
           </div>
           <span className="fs-4 px-1">{likesCant}</span>
+          {/* <span className="fs-4 px-1">0</span> */}
         </div>
       </div>
       <div className={button.class}>
@@ -165,7 +163,7 @@ const Itineraries = (props) => {
               </Carousel>
             </div>
             <div className="col-sm-12 col-md-6">
-               <Comments  comments={comments} idItinerary={_id}/>
+              <Comments comments={comments} idItinerary={_id} />
             </div>
           </div>
         </div>
@@ -176,19 +174,19 @@ const Itineraries = (props) => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     userStatus: state.user.token,
     name: state.user.name,
-  };
-};
+  }
+}
 
 const mapDispatchToProps = {
   getActivities: itineraryActions.getActivities,
   viewLikes: itineraryActions.viewLikes,
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Itineraries);
+export default connect(mapStateToProps, mapDispatchToProps)(Itineraries)
