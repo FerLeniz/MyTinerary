@@ -9,7 +9,7 @@ const userActions = {
       if (resp.data.success) {
         dispatch({ type: "LOG_USER", payload: resp.data.response });
       }
-      return resp;
+      return resp.data;
     };
   },
   logUser: (user) => {

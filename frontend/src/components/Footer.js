@@ -33,7 +33,7 @@ const Footer = () => {
           </ul>
         </div>
         <div className="col-lg-4">
-          <img src={Gify} alt="logo" />
+          {/* <img src={Gify} alt="logo" /> */}
         </div>
         <div className="col-sm-12 col-lg-4">
           <ul className="list-unstyled">

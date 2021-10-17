@@ -25,9 +25,9 @@ const usersController = {
       .then(() => {
         newUser.save();
         const token =jwt.sign({ ...newUser }, process.env.SECRETORKEY)
-        res.json({ success: true,response:{token,name: newUser.name, url: newUser.url} ,error: null, });
+        res.json({ success: true,response:{token,name: newUser.name, url: newUser.url} ,response: null, });
       })
-      .catch((err) => res.json({ success: false, error: err.message }));
+      .catch((err) => res.json({ success: false, response: err.message }));
   },
   logUser: (req, res) => {
     const { email, password,flagGoogle } = req.body;

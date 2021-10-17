@@ -96,11 +96,13 @@ const Comments = (props) => {
         <input
           onChange={messageData}
           className="inputComments"
-          placeholder="write a comment"
+          placeholder={!props.userStatus?'please log in...':'write a comment'}
           name="comment"
           type="text"
           value={comment.message}
+          disabled={!props.userStatus?true:false}
         />
+
         <FontAwesomeIcon
           onClick={loadingComment ? updateComment : null}
           icon={faReply}
