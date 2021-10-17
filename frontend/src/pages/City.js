@@ -42,6 +42,11 @@ class City extends React.Component {
     }
   }
 
+  componentWillUnmount(){
+    const idCityRoute = this.props.match.params.id;
+    this.props.getItineraries(idCityRoute)
+  }
+
   render() {
     if (this.state.loading) {
       return( <Loader />)

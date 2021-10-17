@@ -3,7 +3,7 @@ import axios from "axios";
 const citiesActions = {
   getAllCities: () => {
     return async (dispatch) => {
-      let resp = await axios.get("http://localhost:4000/api/dataCities");
+      let resp = await axios.get("https://mytineraryleniz.herokuapp.com/api/dataCities");
       if (!resp.data.success) {
         throw new Error("Backend and Database problem");
       }

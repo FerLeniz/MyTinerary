@@ -3,7 +3,7 @@ import axios from "axios";
 const itineraryActions = {
   getItineraries: (id) => {
     return (dispatch) => {
-      axios.get("http://localhost:4000/api/itineraries/" + id).then((res) => {
+      axios.get("https://mytineraryleniz.herokuapp.com/api/itineraries/" + id).then((res) => {
         dispatch({ type: "GET_ITINERARIES", payload: res.data.response });
       });
     };
@@ -12,7 +12,7 @@ const itineraryActions = {
     return async (dispatch) => {
       try {
         let axiosResp = await axios.get(
-          "http://localhost:4000/api/activities/" + id
+          "https://mytineraryleniz.herokuapp.com/api/activities/" + id
         );
         return axiosResp.data.response;
       } catch (error) {
@@ -24,7 +24,7 @@ const itineraryActions = {
     return async (dispatch) => {
       try {
         const resp = await axios.post(
-          "http://localhost:4000/api/itinerary/like/" + id,
+          "https://mytineraryleniz.herokuapp.com/api/itinerary/like/" + id,
           { data: { email: name } }
         );
         console.log(id);
@@ -38,7 +38,7 @@ const itineraryActions = {
     return async (dispatch, getState) => {
       try {
         const response = await axios.post(
-          "http://localhost:4000/api/itinerary/comment/" + id,
+          "https://mytineraryleniz.herokuapp.com/api/itinerary/comment/" + id,
           comment,
           {
             headers: {
@@ -56,7 +56,7 @@ const itineraryActions = {
     return async (dispatch, getState) => {
       try {
         const response = await axios.delete(
-          "http://localhost:4000/api/itinerary/comment/" +
+          "https://mytineraryleniz.herokuapp.com/api/itinerary/comment/" +
             id,
           { data: { id: idComment } }
         );
@@ -75,7 +75,7 @@ const itineraryActions = {
     return async (dispatch, getState) => {
       try {
         const response = await axios.put(
-          "http://localhost:4000/api/itinerary/comment/" +
+          "https://mytineraryleniz.herokuapp.com/api/itinerary/comment/" +
             id,
           dataComment
         );

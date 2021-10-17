@@ -113,6 +113,7 @@ const Cities = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    allCitiesArr:state.cities.allCitiesArr,
     filteredCities: state.cities.filterCitArr,
   };
 };
