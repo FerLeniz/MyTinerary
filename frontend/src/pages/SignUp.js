@@ -8,6 +8,7 @@ import {
   faKey,
   faImage,
   faGlobeEurope,
+  faCommentsDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -35,7 +36,7 @@ class SignUp extends React.Component {
         url: "",
         country: "",
       },
-      errors: { name: "", lastName: "", email: "", password: "", url: "" },
+      errorsInput: {}
       //inputError: 'No errors',
     };
 
@@ -118,8 +119,38 @@ class SignUp extends React.Component {
 
    async sendForm(e) {
     e.preventDefault();
-   let resp= await this.props.postUser(this.state.userData)
-   console.log(resp)
+    try{
+      if(Object.values(this.state.userData).some(value => value === '')){
+        toast.error("Complete all fields !", {
+          position: "top-right",
+        });
+      }else{
+        let resp= await this.props.postUser(this.state.userData)
+        console.log(resp)
+        if(!resp.success)throw (resp.response)
+        toast.success("Welcome to adventure", {})
+        this.props.history.push('/')
+      }
+    }catch(error){
+      if(typeof error === 'string'){
+        toast.error(error, {
+          position: "top-right",
+        })
+      }else if(Array.isArray(error)){
+        let errors = {};
+        error.forEach(err=> {
+            errors[err.path[0]] = err.message
+        })
+        this.setState({errorsInput:errors})
+      }else{
+        console.log(typeof error)
+        console.log(error)
+      }
+
+    }
+    
+
+   
     // .then(res =>{
     //   if (res.data.success) {
     //     toast.success("Welcome to adventure", {});
@@ -209,11 +240,13 @@ class SignUp extends React.Component {
                   // onBlur={(e) => this.validateInput(e)}
                   onChange={this.changeValue}
                   type="text"
+                  style={this.state.errorsInput['name'] && {backgroundColor: 'rgba(255,0,0,0.3)'}}
                   className=" fs-4 rounded-pill shadow border border-light noOtuline borderInput"
                   placeholder="First Name"
                   name="name"
                 ></input>
               </div>
+              <small style={{color:'red',fontWeight:'bold'}}>{this.state.errorsInput['name'] && this.state.errorsInput['name']}&nbsp;</small>
               <div className="my-1">
                 <FontAwesomeIcon icon={faUser} className="formSvg" />
                 <input
@@ -222,10 +255,12 @@ class SignUp extends React.Component {
                   className=" fs-4 rounded-pill shadow border border-light noOtuline"
                   type="text"
                   id="lastName"
+                  style={this.state.errorsInput['lastName'] && {backgroundColor: 'rgba(255,0,0,0.3)'}}
                   placeholder="Last Name"
                   name="lastName"
                 />
               </div>
+              <small style={{color:'red',fontWeight:'bold'}}>{this.state.errorsInput['lastName'] && this.state.errorsInput['lastName']}&nbsp;</small>
               <div className="my-1">
                 <FontAwesomeIcon icon={faEnvelope} className="formSvg" />
                 <input
@@ -233,11 +268,13 @@ class SignUp extends React.Component {
                   onChange={this.changeValue}
                   className=" fs-4 rounded-pill shadow border border-light noOtuline"
                   type="text"
+                  style={this.state.errorsInput['email'] && {backgroundColor: 'rgba(255,0,0,0.3)'}}
                   placeholder="Email"
                   id="email"
                   name="email"
                 />
               </div>
+              <small style={{color:'red',fontWeight:'bold'}}>{this.state.errorsInput['email'] && this.state.errorsInput['email']}&nbsp;</small>
               <div className="my-1">
                 <FontAwesomeIcon icon={faKey} className="formSvg" />
                 <input
@@ -245,10 +282,12 @@ class SignUp extends React.Component {
                   onChange={this.changeValue}
                   type="password"
                   className=" fs-4 rounded-pill shadow border border-light noOtuline"
+                  style={this.state.errorsInput['password'] && {backgroundColor: 'rgba(255,0,0,0.3)'}}
                   placeholder="Password"
                   name="password"
                 />
               </div>
+              <small style={{color:'red',fontWeight:'bold'}}>{this.state.errorsInput['password'] && this.state.errorsInput['password']}&nbsp;</small>
               <div className="my-1">
                 <FontAwesomeIcon icon={faImage} className="formSvg" />
                 <input
@@ -256,10 +295,12 @@ class SignUp extends React.Component {
                   onChange={this.changeValue}
                   type="text"
                   className=" fs-4 rounded-pill shadow border border-light noOtuline"
+                  style={this.state.errorsInput['url'] && {backgroundColor: 'rgba(255,0,0,0.3)'}}
                   placeholder="Your photo"
                   name="url"
                 />
               </div>
+              <small style={{color:'red',fontWeight:'bold'}}>{this.state.errorsInput['url'] && this.state.errorsInput['url']}&nbsp;</small>
               <div className="my-1">
                 <FontAwesomeIcon icon={faGlobeEurope} className="formSvg" />
                 <select
