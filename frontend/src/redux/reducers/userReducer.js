@@ -14,7 +14,7 @@ const userReducer = (state = initState, action) => {
         url:action.payload.url
       };
     case "LOG_USER":
-      localStorage.setItem("token", action.payload.token)
+      localStorage.setItem("token",action.payload.token)
       localStorage.setItem("name",action.payload.name)
       localStorage.setItem("url",action.payload.url)
       return {

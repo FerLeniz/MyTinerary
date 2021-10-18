@@ -6,7 +6,6 @@ const userActions = {
       let resp = await axios.post("https://mytineraryleniz.herokuapp.com/api/signUpUser", {
         ...user,
       });
-      console.log(resp)
       if (resp.data.success) {
         dispatch({ type: "LOG_USER", payload: resp.data.response });
       }

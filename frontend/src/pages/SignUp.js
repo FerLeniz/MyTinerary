@@ -8,7 +8,6 @@ import {
   faKey,
   faImage,
   faGlobeEurope,
-  faCommentsDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -37,7 +36,6 @@ class SignUp extends React.Component {
         country: "",
       },
       errorsInput: {}
-      //inputError: 'No errors',
     };
 
     source = axios.CancelToken.source();
@@ -92,12 +90,6 @@ class SignUp extends React.Component {
   componentDidMount() {
     this.toTop();
      this.setState({countries:this.allCountries})
-    // axios.get("https://restcountries.eu/rest/v2/all",{cancelToken: source.token
-    // }).then((res) => {
-    //   this.setState({
-    //     countries: res.data.filter((country) => country.name.length < 12),
-    //   });
-    // });
   }
 
   componentWillUnmount(){
@@ -126,10 +118,8 @@ class SignUp extends React.Component {
         });
       }else{
         let resp= await this.props.postUser(this.state.userData)
-        console.log(resp)
-        if(!resp.success)throw (resp.response)
+        if(!resp.success)throw (resp.error)
         toast.success("Welcome to adventure", {})
-        this.props.history.push('/')
       }
     }catch(error){
       if(typeof error === 'string'){
@@ -143,24 +133,9 @@ class SignUp extends React.Component {
         })
         this.setState({errorsInput:errors})
       }else{
-        console.log(typeof error)
         console.log(error)
       }
-
     }
-    
-
-   
-    // .then(res =>{
-    //   if (res.data.success) {
-    //     toast.success("Welcome to adventure", {});
-    //   } else {
-    //     this.setState({
-    //       inputError: 'Some inputs went wrong',
-    //     });
-    //   }
-    // })
-    // .catch(err=>toast.error(err.message, {position: "top-right"}))
   }
 
   responseGoogle = async (response) => {
@@ -175,7 +150,6 @@ class SignUp extends React.Component {
     };
     let result = await this.props.postUser(newUser);
     if (!result.data.success) {
-      console.log(result)
       toast.error("User exits! Please log in...", {
         position: "top-right",
       });
@@ -189,28 +163,6 @@ class SignUp extends React.Component {
       });
     }
   };
-
-  // validateInput(e) {
-  //   e.preventDefault();
-  //   let inputName = e.target.name;
-  //   this.props.postUser(this.state.userData)
-  //   .then(res=>{
-  //     if (!res.data.success) {
-  //       let value = res.data.errors.filter((err) => err.path[0] === inputName);
-  //       if (value[0] && value[0].path[0] === inputName) {
-  //         this.setState({
-  //           inputError: value[0].message,
-  //           error: null,
-  //         });
-  //       } else {
-  //         this.setState({ inputError: "No errors" });
-  //       }
-  //     } else {
-  //       this.setState({ inputError: "No errors" });
-  //     }
-  //   })
-  //   .catch(err=>console.log(err.message))
-  // }
 
   render() {
     return (
@@ -230,14 +182,12 @@ class SignUp extends React.Component {
                 Sign In here!
               </Link>
             </h4>
-            {/* <h3 className="textError" >{this.state.inputError}</h3> */}
           </div>
           <div className="col-12">
             <form className=" my-2 titleItinerary  rounded  d-flex justify-content-center flex-column">
               <div className="my-1 ">
                 <FontAwesomeIcon icon={faUser} className="formSvg" />
                 <input
-                  // onBlur={(e) => this.validateInput(e)}
                   onChange={this.changeValue}
                   type="text"
                   style={this.state.errorsInput['name'] && {backgroundColor: 'rgba(255,0,0,0.3)'}}
@@ -250,7 +200,6 @@ class SignUp extends React.Component {
               <div className="my-1">
                 <FontAwesomeIcon icon={faUser} className="formSvg" />
                 <input
-                  //onBlur={(e) => this.validateInput(e)}
                   onChange={this.changeValue}
                   className=" fs-4 rounded-pill shadow border border-light noOtuline"
                   type="text"
@@ -264,7 +213,6 @@ class SignUp extends React.Component {
               <div className="my-1">
                 <FontAwesomeIcon icon={faEnvelope} className="formSvg" />
                 <input
-                  //onBlur={(e) => this.validateInput(e)}
                   onChange={this.changeValue}
                   className=" fs-4 rounded-pill shadow border border-light noOtuline"
                   type="text"
@@ -278,7 +226,6 @@ class SignUp extends React.Component {
               <div className="my-1">
                 <FontAwesomeIcon icon={faKey} className="formSvg" />
                 <input
-                  //onBlur={(e) => this.validateInput(e)}
                   onChange={this.changeValue}
                   type="password"
                   className=" fs-4 rounded-pill shadow border border-light noOtuline"
@@ -291,7 +238,6 @@ class SignUp extends React.Component {
               <div className="my-1">
                 <FontAwesomeIcon icon={faImage} className="formSvg" />
                 <input
-                  //onBlur={(e) => this.validateInput(e)}
                   onChange={this.changeValue}
                   type="text"
                   className=" fs-4 rounded-pill shadow border border-light noOtuline"

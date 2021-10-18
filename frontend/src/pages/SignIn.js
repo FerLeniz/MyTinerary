@@ -104,9 +104,9 @@ class SignIn extends React.Component {
     let nameField = e.target.name;
     let value = e.target.value;
 
-    if (nameField === "email" && !value.includes("@")) {
+    if ((nameField === "email" && !value.includes("@")) || (nameField === "email" && !value.includes(".com")) ) {
       this.setState({
-        error: "Complete well with @",
+        error: "Complete with @",
       });
     } else if (nameField === "password" && value.length < 4) {
       this.setState({

@@ -55,7 +55,7 @@ const Header = (props) => {
                 {props.userStatus ? (
                   <div>
                     <NavLink
-                      to="/signup"
+                      to="/"
                       className="text-decoration-none text-dark"
                       onClick={sesionOut}
                     >

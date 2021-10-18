@@ -10,7 +10,7 @@ const Comment = (props) => {
   const [commentContent, setCommentContent] = useState(comment.comment);
   const [updateComment, setUpdateComment] = useState(false);
 
-  alert = () => {
+  const alert = () => {
     MySwal.fire({
       title: "Are you sure?",
       text: "You will not be able to recover this comment!",
