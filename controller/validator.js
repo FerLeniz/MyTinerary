@@ -27,7 +27,7 @@ const validator = (req, res, next) => {
   if (!validation.error) {
     next();
   } else {
-    res.json({ success: false, errors: validation.error.details });
+    res.json({ success: false, error: validation.error.details });
   }
   //next();
 };
