@@ -96,6 +96,12 @@ const Header = (props) => {
             >
               Cities
             </NavLink>
+            <NavLink
+              to="/admin"
+              className="fw-bolder mx-4 fs-5 text-dark text-decoration-none"
+            >
+              Admin
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
