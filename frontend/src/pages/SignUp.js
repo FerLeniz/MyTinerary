@@ -194,7 +194,7 @@ class SignUp extends React.Component {
                   className=" fs-4 rounded-pill shadow border border-light noOtuline borderInput"
                   placeholder="First Name"
                   name="name"
-                ></input>
+                />
               </div>
               <small style={{color:'red',fontWeight:'bold'}}>{this.state.errorsInput['name'] && this.state.errorsInput['name']}&nbsp;</small>
               <div className="my-1">

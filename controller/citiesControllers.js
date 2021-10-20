@@ -27,7 +27,7 @@ const citiesController = {
     const cityToLoad = new City({ ...req.body });
     cityToLoad
       .save()
-      .then(() => res.json({ success: true }))
+      .then(() => res.json({ success: true,response:cityToLoad }))
       .catch((err) => res.json({ success: false, error: err }));
   },
   modifyCity: (req, res) => {

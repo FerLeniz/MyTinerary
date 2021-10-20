@@ -11,6 +11,13 @@ const citiesActions = {
       dispatch({ type: "GET_ALL_CITIES", payload: status });
     };
   },
+  addCity:(dataCity)=>{
+      return async (dispatch)=>{
+        let resp= await axios.post("https://mytineraryleniz.herokuapp.com/api/dataCities",{...dataCity})
+        console.log(resp)
+        dispatch({type: "GET_ALL_CITIES"})//ponerpayload !!
+      }
+  },
   filterCities: (e) => {
     let inputName = e.target.value;
     return (dispatch) => {
