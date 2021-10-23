@@ -35,9 +35,10 @@ const userActions = {
         let res = await axios.get("https://mytineraryleniz.herokuapp.com/api/verifyToken", {
           headers: { Authorization: "Bearer " + token },
         });
+        console.log(res.data)
         dispatch({
           type: "LOG_USER",
-          payload: { token, name: res.data.name, url: res.data.url },
+          payload: { token, name: res.data.name, url: res.data.url,admin:res.data.admin },
         });
       } catch (e) {
        return dispatch({ type: "LOG_OUT" });

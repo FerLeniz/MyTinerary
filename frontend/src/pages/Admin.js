@@ -26,7 +26,7 @@ class Admin extends React.Component {
 
     this.changeValue = this.changeValue.bind(this)
     this.sendForm = this.sendForm.bind(this)
-    this.getActualCities=this.getActualCities.bind(this)
+    this.getActualCities = this.getActualCities.bind(this)
     //this.validateInput = this.validateForm.bind(this);
     this.toTop = this.toTop.bind(this)
   }
@@ -45,16 +45,16 @@ class Admin extends React.Component {
     this.getActualCities()
   }
 
-   async getActualCities(){
-     try{
-       await this.props.getCities()
-     }catch(error){
-       console.log(error)
-     }
-   }
+  async getActualCities() {
+    try {
+      await this.props.getCities()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   async sendForm() {
-    try{
+    try {
       if (Object.values(this.state.cityData).some((value) => value === "")) {
         toast.error("Complete all fields !", {
           position: "top-right",
@@ -62,11 +62,21 @@ class Admin extends React.Component {
       } else {
         let res = await this.props.addCity(this.state.cityData)
         console.log(res)
+        this.setState({...this.state,cityData: {
+          name: "",
+          image: "",
+          country: "",
+          currentMoney: "",
+          language: "",
+          description: "",
+        }})
+        await this.props.getCities()
+        console.log(this)
 
-        //CARGAR NUEVAS CIUDADES, AGREGAR en ACTIONS que le pegue A la APII 
+        //CARGAR NUEVAS CIUDADES, AGREGAR en ACTIONS que le pegue A la APII
       }
-    }catch(error){
-        console.log(error)
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -82,14 +92,35 @@ class Admin extends React.Component {
       <>
         <Header />
         <div className="row">
-          <div className="col-sm-12 col-md-6 bg-danger">
-            <h1 className="text-center">Form</h1>
-            <form className=" d-flex justify-content-center align-items-center flex-column">
+        <div className="col-sm-12 col-md-6">
+            <h1 className="text-center bg-dark text-white">Recently added</h1>
+            <div className="divCityAdmin">
+              {this.props.allCitiesArr !== undefined &&
+                this.props.allCitiesArr.map((city, index) => (
+                  <div className="row" key={index}>
+                    <div className="col-6">
+                      <p className="text-center">{city.name}</p>
+                    </div>
+                    <div className="col-6">
+                      <div>
+                        <i className="fas fa-edit cursor px-2"></i>
+                        <i className="fas fa-trash-alt cursor"></i>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+          <div className="col-sm-12 col-md-6">
+            <h1 className="text-center bg-dark text-white">Form</h1>
+            <div className="d-flex justify-content-center ">
+            <form className=" bg-primary bg-gradient rounded py-3 w-50 d-flex justify-content-center align-items-center flex-column">
               <input
                 onChange={this.changeValue}
                 placeholder="name"
                 type="text"
                 name="name"
+                value={this.state.cityData.name}//aAGREGAR A LOS OTROS !!!
                 className=" fs-4 rounded-pill shadow border border-light noOtuline borderInput my-1"
               />
               <input
@@ -97,6 +128,7 @@ class Admin extends React.Component {
                 placeholder="image url"
                 type="text"
                 name="image"
+                value={this.state.cityData.image}
                 className=" fs-4 rounded-pill shadow border border-light noOtuline borderInput my-1"
               />
               <input
@@ -111,6 +143,7 @@ class Admin extends React.Component {
                 placeholder="currentMoney"
                 type="text"
                 name="currentMoney"
+                value={this.state.cityData.currentMoney}
                 className=" fs-4 rounded-pill shadow border border-light noOtuline borderInput my-1"
               />
               <input
@@ -118,17 +151,21 @@ class Admin extends React.Component {
                 placeholder="language"
                 type="text"
                 name="language"
+                value={this.state.cityData.language}
                 className=" fs-4 rounded-pill shadow border border-light noOtuline borderInput my-1"
               />
               <input
                 onChange={this.changeValue}
                 placeholder="description"
                 type="text"
+                value={this.state.cityData.description} 
                 name="description"
                 className=" fs-4 rounded-pill shadow border border-light noOtuline borderInput my-1"
               />
               {/* <input type="submit" value="Submit" /> */}
             </form>
+            </div>
+           
             <div className="d-flex justify-content-center">
               <button
                 className="my-2 py-1 px-3 viewMore"
@@ -137,22 +174,6 @@ class Admin extends React.Component {
                 <p className="fs-4 ">Add city</p>
               </button>
             </div>
-          </div>
-          <div className="col-sm-12 col-md-6">
-            <h1 className="text-center">Recently added</h1>
-            {this.props.allCitiesArr.map((city,index) => (
-              <div className="row" key={index}>
-                <div className="col-6">
-                  <p className="text-center">{city.name}</p>
-                </div>
-                <div className="col-6">
-                  <div>
-                    <i className="fas fa-edit cursor px-2"></i>
-                    <i className="fas fa-trash-alt cursor"></i>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
         <Footer />
@@ -170,7 +191,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   getCities: citiesActions.getAllCities,
-  addCity:citiesActions.addCity
+  addCity: citiesActions.addCity,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Admin)
