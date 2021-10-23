@@ -25,7 +25,7 @@ const usersController = {
       .then(() => {
         newUser.save();
         const token =jwt.sign({ ...newUser }, process.env.SECRETORKEY)
-        res.json({ success: true,response:{token,name: newUser.name, url: newUser.url} ,error: null, });
+        res.json({ success: true,response:{token,name: newUser.name, url: newUser.url,admin:newUser.admin} ,error: null, });
       })
       .catch((err) => res.json({ success: false, error: err.message }));
   },
@@ -46,7 +46,7 @@ const usersController = {
         const token = jwt.sign({ ...user }, process.env.SECRETORKEY);
         res.json({
           success: true,
-          response: { token, name: user.name, url: user.url },
+          response: { token, name: user.name, url: user.url,admin:user.admin },
           error: null,
         });
       })

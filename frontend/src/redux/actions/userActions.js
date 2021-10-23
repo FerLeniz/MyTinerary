@@ -17,7 +17,7 @@ const userActions = {
       let res = await axios.post("https://mytineraryleniz.herokuapp.com/api/logInUser", {
         ...user,
       });
-
+         console.log(res)
       if (res.data.success) {
         dispatch({ type: "LOG_USER", payload: res.data.response });
       }

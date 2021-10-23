@@ -96,12 +96,14 @@ const Header = (props) => {
             >
               Cities
             </NavLink>
+            {!props.admin && 
             <NavLink
-              to="/admin"
-              className="fw-bolder mx-4 fs-5 text-dark text-decoration-none"
+            to="/admin"
+            className="fw-bolder mx-4 fs-5 text-dark text-decoration-none"
             >
-              Admin
+            Admin
             </NavLink>
+            }
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -114,6 +116,7 @@ const mapStateToProps = (state) => {
     userStatus: state.user.token,
     name: state.user.name,
     url: state.user.url,
+    admin:state.user.admin
   };
 };
 

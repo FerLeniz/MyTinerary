@@ -18,6 +18,7 @@ const App = (props) => {
     if (localStorage.getItem("token")) {
       props.anticipateLogInLS(localStorage.getItem("token"))
     }
+    console.log(props)
     // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [])
 
@@ -27,7 +28,7 @@ const App = (props) => {
         <Route exact path="/" component={Home} />
         <Route path="/cities" component={Cities} />
         <Route path="/city/:id" component={City} />
-        <Route path="/admin" component={Admin} />
+        {!props.admin && <Route path="/admin" component={Admin} />} 
         {!props.token && <Route path="/signin" component={SignIn} />}
         {!props.token && <Route path="/signup" component={SignUp} />}
         <Route path="/notFound" component={notFound404} />
@@ -41,7 +42,8 @@ const mapStateToProps = (state) => {
   return {
     token: state.user.token,
     url:state.user.url,
-    name:state.user.name
+    name:state.user.name,
+    admin:state.user.admin
   };
 };
 
