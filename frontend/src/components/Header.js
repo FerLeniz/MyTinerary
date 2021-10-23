@@ -96,7 +96,7 @@ const Header = (props) => {
             >
               Cities
             </NavLink>
-            {!props.admin && 
+            {props.admin && 
             <NavLink
             to="/admin"
             className="fw-bolder mx-4 fs-5 text-dark text-decoration-none"

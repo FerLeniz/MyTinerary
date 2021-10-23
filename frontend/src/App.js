@@ -18,7 +18,6 @@ const App = (props) => {
     if (localStorage.getItem("token")) {
       props.anticipateLogInLS(localStorage.getItem("token"))
     }
-    console.log(props)
     // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [])
 
@@ -28,7 +27,7 @@ const App = (props) => {
         <Route exact path="/" component={Home} />
         <Route path="/cities" component={Cities} />
         <Route path="/city/:id" component={City} />
-        {!props.admin && <Route path="/admin" component={Admin} />} 
+        {props.admin && <Route path="/admin" component={Admin} />} 
         {!props.token && <Route path="/signin" component={SignIn} />}
         {!props.token && <Route path="/signup" component={SignUp} />}
         <Route path="/notFound" component={notFound404} />

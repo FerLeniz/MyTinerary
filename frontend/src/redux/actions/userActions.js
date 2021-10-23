@@ -17,7 +17,6 @@ const userActions = {
       let res = await axios.post("https://mytineraryleniz.herokuapp.com/api/logInUser", {
         ...user,
       });
-         console.log(res)
       if (res.data.success) {
         dispatch({ type: "LOG_USER", payload: res.data.response });
       }
@@ -35,7 +34,6 @@ const userActions = {
         let res = await axios.get("https://mytineraryleniz.herokuapp.com/api/verifyToken", {
           headers: { Authorization: "Bearer " + token },
         });
-        console.log(res.data)
         dispatch({
           type: "LOG_USER",
           payload: { token, name: res.data.name, url: res.data.url,admin:res.data.admin },
