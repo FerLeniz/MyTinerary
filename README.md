@@ -2,7 +2,7 @@
 <h5 align="center">En esta ocasión les presento la version web app de MyTinerary para dispositivos  que cuenten con navegador de cualquier terminal independientemente del sistema operativo que utilice.</h5>
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/85353985/138560443-0528394a-5d1c-4840-b64f-1bf2e2f8a0f0.gif" width=60% height=60%>
+<img src="https://user-images.githubusercontent.com/85353985/138560443-0528394a-5d1c-4840-b64f-1bf2e2f8a0f0.gif" width=70% height=70%>
 </p>
 
 <h2>🔑Forma de acceso</h2>
